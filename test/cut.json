@@ -1,115 +1,84 @@
 {
-    "jar": "TESTPROGRAM",
-    "rootDir": "/home/tchen/gaps/java-closure",
-    "codeDir": "testprog",
+   "jar":"TESTPROGRAM",
+   "rootDir": "/home/tchen/gaps/java-closure",
+   "codeDir": "testprog",
 
-    "dstDir": "/tmp/xdcc",
-    "entry": {
-        "mainClass": "com.peratonlabs.closure.testprog.example1.Example1",
-        "filepath": "src/example1/Example1.java" 
-     },
-    "enclaves" : [
-        { "name": "Purple",
-          "assignedClasses" : [ "com.peratonlabs.closure.testprog.example1.Extra"]
-        },
-        { "name": "Orange",
-          "assignedClasses" : [ ]
-        }        
-    ],
-     
-    "assignments": [
-        {
-            "className": "com.peratonlabs.closure.testprog.example1.Extra",
-            "enclave": "Purple"
-        }
-    ],
-    "cuts": [
-        {
-            "methodSignature": {
-                "fqcn" : "com.peratonlabs.closure.testprog.example1.Extra",
-                "name" : "getValue",
-                "returnType" : "int",
-                "parameterTypes": []
-            },
-            "callee": { 
-                "type": "com.peratonlabs.closure.testprog.example1.Extra", 
-                "level": "Purple" 
-            },
-            "allowedCallers": [
-                { 
-                   "type": "com.peratonlabs.closure.testprog.example1.Example1", 
-                   "level": "Orange" 
-                }
-            ]
-        },
-        {
-            "methodSignature": {
-                "fqcn" : "com.peratonlabs.closure.testprog.example1.Extra",
-                "name" : "Extra",
-                "parameterTypes": ["int", "double"]
-            },
-            "callee": { 
-                "type": "com.peratonlabs.closure.testprog.example1.Extra", 
-                "level": "Purple" 
-            },
-            "allowedCallers": [
-                { 
-                   "type": "com.peratonlabs.closure.testprog.example1.Example1", 
-                   "level": "Orange" 
-                }
-             ]
-        },
-        {
-            "methodSignature": {
-                "fqcn" : "com.peratonlabs.closure.testprog.example1.Extra",
-                "name" : "staticX",
-                "parameterTypes": []
-            },
-            "callee": { 
-                "type": "com.peratonlabs.closure.testprog.example1.Extra", 
-                "level": "Purple" 
-            },
-            "allowedCallers": [
-                { 
-                   "type": "com.peratonlabs.closure.testprog.example1.Example1", 
-                   "level": "Orange" 
-                }
-             ]
-        },
-        {
-            "methodSignature": {
-                "fqcn" : "com.peratonlabs.closure.testprog.example1.Extra",
-                "name" : "pubY",
-                "parameterTypes": []
-            },
-            "callee": { 
-                "type": "com.peratonlabs.closure.testprog.example1.Extra", 
-                "level": "Purple" 
-            },
-            "allowedCallers": [
-                { 
-                   "type": "com.peratonlabs.closure.testprog.example1.Example1", 
-                   "level": "Orange" 
-                }
-             ]
-        },
-        {
-            "methodSignature": {
-                "fqcn" : "com.peratonlabs.closure.testprog.example1.Extra",
-                "name" : "staticMethod",
-                "returnType" : "java.lang.String",
-                "parameterTypes": []
-            },
-            "callee": { 
-                "type": "com.peratonlabs.closure.testprog.example1.Extra", 
-                "level": "Purple" 
-            },
-            "allowedCallers": [
-                { 
-                   "type": "com.peratonlabs.closure.testprog.example1.Example1", 
-                   "level": "Orange" 
-                }
-             ]
-        }
-    ]
+   "dstDir": "/tmp/xdcc",
+   "entry":{
+      "mainClass":"com.peratonlabs.closure.testprog.example1.Example1",
+      "filepath":"src/example1/Example1.java",
+      "enclave": "orange_E"
+   },  
+   "enclaves":[
+      {
+         "assignedClasses":[
+            "com.peratonlabs.closure.testprog.example1.Extra",
+            "com.peratonlabs.closure.testprog.example1.Parent"
+         ],
+         "name":"purple_E",
+         "level": "purple"
+      },
+      {
+         "assignedClasses":[
+            "com.peratonlabs.closure.testprog.example1.Example1"
+         ],
+         "name":"orange_E",
+         "level": "purple"
+      }
+   ],
+   "assignments":[
+      {
+         "className":"com.peratonlabs.closure.testprog.example1.Extra",
+         "enclave":"purple_E"
+      },
+      {
+         "className":"com.peratonlabs.closure.testprog.example1.Parent",
+         "enclave":"purple_E"
+      },
+      {
+         "className":"com.peratonlabs.closure.testprog.example1.Example1",
+         "enclave":"orange_E"
+      }
+   ],
+   "cuts":[
+      {
+         "callee":{
+            "type":"com.peratonlabs.closure.testprog.example1.Extra",
+            "level":"purple"
+         },
+         "allowedCallers":[
+            {
+               "type":"com.peratonlabs.closure.testprog.example1.Extra",
+               "level":"purple"
+            }
+         ],
+         "methodSignature":{
+            "parameterTypes":[int, double
+            ],
+            "fqcn":"com.peratonlabs.closure.testprog.example1.Extra",
+            "name":"Extra",
+            "returnType":"CONSTRUCTOR"
+         }
+      },
+      {
+         "callee":{
+            "type":"com.peratonlabs.closure.testprog.example1.Extra",
+            "level":"purple"
+         },
+         "allowedCallers":[
+            {
+               "type":"com.peratonlabs.closure.testprog.example1.Extra",
+               "level":"purple"
+            }
+         ],
+         "methodSignature":{
+            "parameterTypes":[
+               
+            ],
+            "fqcn":"com.peratonlabs.closure.testprog.example1.Extra",
+            "name":"getValue",
+            "returnType":"int"
+         }
+      }
+   ]
 }
