@@ -1,0 +1,13 @@
+package com.peratonlabs.closure.aspectj;
+
+import com.peratonlabs.closure.remote.##ClosureRemote##;
+
+public aspect ##ClassName##MainAspect {
+    // static method invocation/execution
+    private pointcut staticMain(): execution(public static void ##EntryClass##.main(String[]));
+
+    Object around(): staticMain() {
+        ##ClosureRemote##.init();
+        return null;
+    }
+}

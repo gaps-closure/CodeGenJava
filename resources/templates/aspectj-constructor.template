@@ -1,0 +1,44 @@
+    public class Shadow##ClassName## extends ##FQCN## {
+       Shadow##ClassName##() {}
+    }
+
+    // constructor invocation
+    ##FQCN## around(Object myObject) : 
+        call(##FQCN##.new(##ARGS##)) && 
+        !within(##EnclaveName##) && 
+        this(myObject) {
+        
+        ##FQCN## obj = null;
+        try {
+            ConstructorSignature signature = (ConstructorSignature) thisJoinPoint.getSignature();
+
+            // Class<?>[] argTypes = signature.getParameterTypes();
+            // Constructor<?> cons = ##FQCN##.class.getConstructor(argTypes);
+            // obj = (##FQCN##) cons.newInstance(thisJoinPoint.getArgs());
+            obj = new Shadow##ClassName##();
+
+            ClosureShadow.instantiate(obj, signature, thisJoinPoint.getArgs());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+    
+    // constructor execution: this also captures invocation via reflection
+    Object around(Object myObject) : 
+        execution(##FQCN##.new(##ARGS##)) && 
+        this(myObject) {
+
+        // throw new Exception();
+        return null;
+    }
+
+    // object finalization
+    after(Object myObject) : 
+        execution(void ##FQCN##.finalize()) && 
+        this(myObject) {
+        
+        ClosureShadow.finalize(myObject);
+    }    
+

@@ -1,0 +1,46 @@
+  <xs:complexType name="GapsFieldName">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element name="Length0" type="xs:unsignedShort"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="2"
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{dfdl:valueLength(../Value0,'bytes')}"
+                  />
+      <xs:element minOccurs="1" name="Value0" type="xs:string"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="{../Length0}"
+                  dfdl:lengthUnits="bytes" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GapsClassName">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element minOccurs="1" name="TC_STRING" type="gma:gapsuint8" />
+      <xs:element name="Length2" type="xs:unsignedShort"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="2"
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{dfdl:valueLength(../Value2,'bytes')}"
+                  />
+      <xs:element minOccurs="1" name="Value2" type="xs:string"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="{../Length2}"
+                  dfdl:lengthUnits="bytes" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="GapsBlockData">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element minOccurs="1" name="TC_BLOCKDATA" type="gma:gapsuint8" />
+      <xs:element name="Length2" type="xs:unsignedByte"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="1"
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{dfdl:valueLength(../Value2,'bytes')}"
+                  />
+      <xs:element minOccurs="1" name="Value2" type="xs:hexBinary"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="{../Length2}"
+                  dfdl:lengthUnits="bytes" />
+    </xs:sequence>    
+  </xs:complexType>

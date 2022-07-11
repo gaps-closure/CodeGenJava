@@ -1,0 +1,144 @@
+package com.peratonlabs.closure.aspectj;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+
+import org.aspectj.lang.reflect.ConstructorSignature;
+import org.aspectj.lang.reflect.MethodSignature;
+
+import ##FQCN##;
+import com.peratonlabs.closure.remote.ClosureRemoteRMI;
+import com.peratonlabs.closure.remote.ClosureShadow;
+
+public aspect ##ClassName##ClosureAspect {
+    // declare error : noInstance() : "Instantiation of the ##ClassName## class is not allowed in this enclave";
+
+    // constructor invocation
+    ##ClassName## around(Object myObject) : call(##ClassName##.new(..)) && !within(##ClassName##ClosureAspect) && this(myObject) {
+        System.out.println(thisJoinPoint);
+        
+        ##ClassName## obj = null;
+        try {
+            ConstructorSignature signature = (ConstructorSignature) thisJoinPoint.getSignature();
+
+            Class<?>[] argTypes = signature.getParameterTypes();
+            Constructor<?> cons = ##ClassName##.class.getConstructor(argTypes);
+            obj = (##ClassName##) cons.newInstance(thisJoinPoint.getArgs());
+
+            ClosureShadow.instantiate(obj, signature, thisJoinPoint.getArgs());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+    
+    // constructor execution: this also captures invocation via reflection
+    Object around(Object myObject) : execution(##ClassName##.new(..)) && this(myObject) {
+        System.out.println(thisJoinPointStaticPart);
+        // throw new Exception();
+        return null;
+    }
+
+    // object finalization
+    after(Object myObject) : execution(void ##ClassName##.finalize()) && this(myObject) {
+        System.err.println("finalize...");
+        ClosureShadow.finalize(myObject);
+    }
+    
+    /******* fields *******/
+    // all instance field reads
+    Object around(Object myObject) : get(* ##ClassName##.*)  && target(myObject) {
+        System.out.println(thisJoinPointStaticPart);
+
+        String fieldName = thisJoinPoint.getSignature().getName();
+        return ClosureShadow.readField(myObject, fieldName);
+    }
+    
+    // all static field reads
+    Object around() : get(static * ##ClassName##.*) {
+        String className = thisJoinPointStaticPart.getSignature().getDeclaringTypeName();
+        String fieldName = thisJoinPoint.getSignature().getName();
+        
+        return ClosureShadow.readStaticField(className, fieldName);
+    }
+    
+    // all instance field writes
+    void around(Object myObject, Object value) : set(* ##ClassName##.*)  && target(myObject) && args(value) {
+        System.out.println(thisJoinPointStaticPart);
+        
+        String fieldName = thisJoinPoint.getSignature().getName();
+        ClosureShadow.writeField(myObject, fieldName, value);
+    }
+    
+    // all static field writes
+    void around(Object value) : set(static * ##ClassName##.*)  && args(value) {
+        String className = thisJoinPointStaticPart.getSignature().getDeclaringTypeName();
+        String fieldName = thisJoinPoint.getSignature().getName();
+        
+        ClosureShadow.writeStaticField(className, fieldName, value);
+    }
+    
+    // all field reads via reflection
+    Object around(Object myObject, Field field):
+        call(* Field.get*(..)) && target(field) && args(myObject) && !within(##ClassName##ClosureAspect)  {
+       
+        String fieldName = field.getName();
+        return ClosureShadow.readField(myObject, fieldName);
+    }
+    
+    // all field writes via reflection
+    void around(##ClassName## myObject, Object newValue, Field field): 
+         call(public void Field.set*(Object, *)) && args(myObject, newValue) && target(field) {
+        
+        String fieldName = field.getName();
+        ClosureShadow.writeField(myObject, fieldName, newValue);
+    }
+    
+    // all static field reads via reflection
+    Object around(Field field):
+        call(* Field.get*(..)) && target(field) && !within(##ClassName##ClosureAspect)  {
+       
+        String className = field.getClass().getName();
+        String fieldName = field.getName();
+        return ClosureShadow.readStaticField(className, fieldName);
+    }
+    
+    // all static field writes via reflection
+    void around(##ClassName##  myObject, Object newValue, Field field): 
+         call(public void Field.set*(Object, *)) && args(myObject, newValue) && target(field) {
+        
+        String className = field.getClass().getName();
+        String fieldName = field.getName();
+        ClosureShadow.writeStaticField(className, fieldName, newValue);
+    }
+    
+    /******* Method Invocations **********/
+    
+    // method invocation/execution
+    private pointcut methodExec() : execution(* ##ClassName##.*(..));
+    
+    // method invocation/execution: this also captures invocations via reflection
+    Object around(Object myObject): methodExec() && target(myObject) {
+        MethodSignature signature = (MethodSignature) thisJoinPoint.getSignature();
+        
+        return ClosureShadow.invokeMethod(myObject, signature, thisJoinPoint.getArgs());
+    }
+    
+    // static method invocation/execution
+    private pointcut staticMethod(): execution(static * ##ClassName##.*());
+    private pointcut staticMain(): execution(public static void ##EntryClass##.main(String[]));
+
+    Object around(): staticMethod() && !staticMain() {
+        MethodSignature signature = (MethodSignature) thisJoinPoint.getSignature();
+
+        return ClosureShadow.invokeMethod(null, signature, thisJoinPoint.getArgs());
+    }
+    
+    Object around(): staticMain() {
+        // ClosureRemoteRMI.init();
+        // return proceed();   // master
+        // return null;   // slave
+        ##ProceedToOriginalMain##
+    }
+}

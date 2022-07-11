@@ -1,0 +1,242 @@
+{
+"gedl": [
+	{
+		"caller": "orange",
+		"callee": "green",
+		"calls": [
+			{
+				"func":		"echo_component_heartbeats",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_COMPONENT_HEARTBEATS",
+				"params": [
+					{"type": "char", "name": "ss", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "st", "dir": "in", "sz":64}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [701]}
+				]
+			},
+			{
+				"func":		"echo_groundMovers",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_GROUNDMOVERS",
+				"params": [
+					{"type": "double", "name": "bearing", "dir": "in"}, 
+					{"type": "double", "name": "lat", "dir": "in"}, 
+					{"type": "double", "name": "lon", "dir": "in"}, 
+					{"type": "double", "name": "speed", "dir": "in"}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}, 
+					{"type": "char", "name": "vehicleID", "dir": "in", "sz":15}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [753]}
+				]
+			},
+			{
+				"func":		"echo_pnt",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_PNT",
+				"params": [
+					{"type": "double", "name": "alt", "dir": "in"}, 
+					{"type": "double", "name": "lat", "dir": "in"}, 
+					{"type": "double", "name": "lon", "dir": "in"}, 
+					{"type": "int", "name": "time", "dir": "in"}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [806]}
+				]
+			},
+			{
+				"func":		"echo_recieveEOIRDetections",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_RECIEVEEOIRDETECTIONS",
+				"params": [
+					{"type": "int", "name": "detectsActiveCnt", "dir": "in"}, 
+					{"type": "int", "name": "detectsMaxCnt", "dir": "in"}, 
+					{"type": "char", "name": "TGT_ISRM_ID0", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID1", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID2", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID3", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID4", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID5", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID6", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID7", "dir": "in", "sz":32}, 
+					{"type": "double", "name": "alt", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "bearing", "dir": "in", "sz":8}, 
+					{"type": "char", "name": "classification0", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification1", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification2", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification3", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification4", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification5", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification6", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification7", "dir": "in", "sz":64}, 
+					{"type": "double", "name": "confidence", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "lat", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "lon", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "speed", "dir": "in", "sz":8}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [898]}
+				]
+			},
+			{
+				"func":		"echo_recieveISRMDetections",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_RECIEVEISRMDETECTIONS",
+				"params": [
+					{"type": "int", "name": "detectsActiveCnt", "dir": "in"}, 
+					{"type": "int", "name": "detectsMaxCnt", "dir": "in"}, 
+					{"type": "char", "name": "TGT_ISRM_ID0", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID1", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID2", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID3", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID4", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID5", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID6", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID7", "dir": "in", "sz":32}, 
+					{"type": "double", "name": "alt", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "bearing", "dir": "in", "sz":8}, 
+					{"type": "char", "name": "classification0", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification1", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification2", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification3", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification4", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification5", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification6", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification7", "dir": "in", "sz":64}, 
+					{"type": "double", "name": "confidence", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "lat", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "lon", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "speed", "dir": "in", "sz":8}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [1010]}
+				]
+			},
+			{
+				"func":		"echo_recieveRDRDetections",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_RECIEVERDRDETECTIONS",
+				"params": [
+					{"type": "int", "name": "detectsActiveCnt", "dir": "in"}, 
+					{"type": "int", "name": "detectsMaxCnt", "dir": "in"}, 
+					{"type": "char", "name": "TGT_ISRM_ID0", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID1", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID2", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID3", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID4", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID5", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID6", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "TGT_ISRM_ID7", "dir": "in", "sz":32}, 
+					{"type": "double", "name": "alt", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "bearing", "dir": "in", "sz":8}, 
+					{"type": "char", "name": "classification0", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification1", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification2", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification3", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification4", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification5", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification6", "dir": "in", "sz":64}, 
+					{"type": "char", "name": "classification7", "dir": "in", "sz":64}, 
+					{"type": "double", "name": "confidence", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "lat", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "lon", "dir": "in", "sz":8}, 
+					{"type": "double", "name": "speed", "dir": "in", "sz":8}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [1122]}
+				]
+			},
+			{
+				"func":		"echo_requestEOIRDetections",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_REQUESTEOIRDETECTIONS",
+				"params": [
+					{"type": "char", "name": "phase", "dir": "in", "sz":32}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [1188]}
+				]
+			},
+			{
+				"func":		"echo_requestISRMDetections",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_REQUESTISRMDETECTIONS",
+				"params": [
+					{"type": "char", "name": "phase", "dir": "in", "sz":32}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [1231]}
+				]
+			},
+			{
+				"func":		"echo_requestRDRDetections",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_REQUESTRDRDETECTIONS",
+				"params": [
+					{"type": "char", "name": "phase", "dir": "in", "sz":32}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [1274]}
+				]
+			},
+			{
+				"func":		"echo_updateMissionPlan",
+				"returns":	{"type": "int"},
+				"clelabel":	"XDLINKAGE_ECHO_UPDATEMISSIONPLAN",
+				"params": [
+					{"type": "char", "name": "missionPlanId", "dir": "in", "sz":32}, 
+					{"type": "int", "name": "actionsActiveCnt", "dir": "in"}, 
+					{"type": "int", "name": "actionsMaxCnt", "dir": "in"}, 
+					{"type": "char", "name": "actionId0", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "actionId1", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "actionId2", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "actionType0", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "actionType1", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "actionType2", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "wayPointId0", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "wayPointId1", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "wayPointId2", "dir": "in", "sz":32}, 
+					{"type": "int", "name": "numberOfSensorWayPoints", "dir": "in"}, 
+					{"type": "char", "name": "sensorPlanId", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "vehiclePlanId", "dir": "in", "sz":32}, 
+					{"type": "int", "name": "numberOfWayPoints", "dir": "in"}, 
+					{"type": "char", "name": "vehiclePlanId1", "dir": "in", "sz":32}, 
+					{"type": "int", "name": "wayPointsActiveCnt", "dir": "in"}, 
+					{"type": "int", "name": "wayPointsMaxCnt", "dir": "in"}, 
+					{"type": "char", "name": "wayPointId20", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "wayPointId21", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "wayPointId22", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "wayPointId23", "dir": "in", "sz":32}, 
+					{"type": "char", "name": "wayPointId24", "dir": "in", "sz":32}, 
+					{"type": "double", "name": "x", "dir": "in", "sz":5}, 
+					{"type": "double", "name": "y", "dir": "in", "sz":5}, 
+					{"type": "double", "name": "z", "dir": "in", "sz":5}, 
+					{"type": "int", "name": "timestamp1", "dir": "in"}, 
+					{"type": "int", "name": "timestamp2", "dir": "in"}
+				],
+				"occurs": [
+					{"file": "/home/tchen/gaps/build/apps/eop1/timing2/xdcc/egress_xdcc/./divvied-working/orange/egress_xdcc.c", "lines": [1369]}
+				]
+			}
+		]
+	}
+]}

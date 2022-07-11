@@ -1,0 +1,9 @@
+    
+    // method invocation/execution: this also captures invocations via reflection
+    Object around(Object myObject): 
+        execution(* ##FQCN##.##MethodName##(##ARGS##)) && 
+        target(myObject) {
+        MethodSignature signature = (MethodSignature) thisJoinPoint.getSignature();
+        
+        return ClosureShadow.invokeMethod(myObject, signature, thisJoinPoint.getArgs());
+    }

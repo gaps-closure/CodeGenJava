@@ -1,0 +1,134 @@
+package com.peratonlabs.closure.aspectj;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+
+import org.aspectj.lang.reflect.ConstructorSignature;
+import org.aspectj.lang.reflect.MethodSignature;
+
+import ##FQCN##;
+import com.peratonlabs.closure.remote.ClosureRemoteRMI;
+import com.peratonlabs.closure.remote.ClosureShadow;
+
+public aspect ##ClassName##ClosureAspect {
+    // declare error : noInstance() : "Instantiation of the ##ClassName## class is not allowed in this enclave";
+
+    declare precedence: ##EnclaveName##, *;
+    
+    public void invalid(String message) {
+        throw new RuntimeException(message);
+    }
+    
+    // constructor invocation
+    ##ClassName## around(Object myObject) : call(##ClassName##.new(..)) && !within(##ClassName##ClosureAspect) && this(myObject) {
+        ConstructorSignature signature = (ConstructorSignature) thisJoinPoint.getSignature();
+        invalid("Not allowed to call the constructor: " + signature);
+
+        return null;
+    }
+    
+    // constructor execution: this also captures invocation via reflection
+    Object around(Object myObject) : execution(##ClassName##.new(..)) && this(myObject) {
+        ConstructorSignature signature = (ConstructorSignature) thisJoinPoint.getSignature();
+        invalid("Not allowed to invoke this Constructor " + signature);
+        return null;
+    }
+
+    // object finalization
+    after(Object myObject) : execution(void ##ClassName##.finalize()) && this(myObject) {
+        ConstructorSignature signature = (ConstructorSignature) thisJoinPoint.getSignature();
+        invalid("Not allowed to call finalize() " + signature);
+    }
+    
+    /******* fields *******/
+    // all class or instance field reads
+    private pointcut fieldGet() : get(* ##FQCN##.*) && !within(##FQCN##);
+    declare error : fieldGet() : "direct read from ##ClassName##'s fields is not allowed in this enclave. Use a getter";
+
+    // all instance field writes
+    private pointcut fieldSet() : set(* ##FQCN##.*) && !within(##FQCN##);
+    declare error : fieldSet() : "direct write to ##ClassName##'s fields is not allowed in this enclave. Use a setter";
+    
+    // all field reads via reflection
+    Object around(Field field, Object myObject):
+        call(public Object Field.get(Object)) && 
+        target(field) && 
+        args(myObject) {
+       
+        Object result = null;
+        if (field.getDeclaringClass() == ##FQCN##.class)
+            result = proceed(field, myObject);
+        else {
+            invalid("Not allowed to read field via reflection: ##FQCN##." + field.getName());
+        }
+        
+        return result;
+    }
+    
+    // all field writes via reflection
+    void around(Field field, ##ClassName## myObject, Object newValue): 
+         call(public void Field.set(Object, Object)) && 
+         target(field) &&
+         args(myObject, newValue) {
+        
+        //Object result = null;
+        if (field.getDeclaringClass() == ##FQCN##.class)
+            proceed(field, myObject, newValue);
+        else {
+            invalid("Not allowed to write field via reflection: ##FQCN##."  + field.getName());
+        }
+    }
+    
+    // static field reads via reflection
+    Object around(Field field):
+        call(public Object Field.get(Object)) && 
+        target(field) {
+       
+        Object result = null;
+        if (field.getDeclaringClass() == ##FQCN##.class)
+            result = proceed(field);
+        else {
+            invalid("Not allowed to read static field via reflection: ##FQCN##." + field.getName());
+        }
+        
+        return result;
+    }
+    
+    // all static field writes via reflection
+    void around(Field field, Object newValue): 
+         call(public void Field.set(Object, Object)) && 
+         target(field) &&
+         args(newValue) {
+        
+        if (field.getDeclaringClass() == ##FQCN##.class)
+            proceed(field, newValue);
+        else {
+            invalid("Not allowed to write static field via reflection: ##FQCN##."  + field.getName());
+        }
+    }
+    
+    /******* Method Invocations **********/
+    
+    // method invocation/execution
+    private pointcut methodExec() : execution(* ##ClassName##.*(..));
+    
+    // method invocation/execution: this also captures invocations via reflection
+    Object around(Object myObject): methodExec() && target(myObject) {
+        MethodSignature signature = (MethodSignature) thisJoinPoint.getSignature();
+        
+        invalid("Not allowed to invoke this method " + signature);
+        
+        return null;
+    }
+    
+    // static method invocation/execution
+    private pointcut staticMethod(): execution(static * ##ClassName##.*());
+
+    Object around(): staticMethod() {
+        MethodSignature signature = (MethodSignature) thisJoinPoint.getSignature();
+
+        invalid("Not allowed to invoke static method " + signature);
+        
+        return null;
+    }
+}

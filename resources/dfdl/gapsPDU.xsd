@@ -1,0 +1,43 @@
+  <xs:element name="GapsPDU">
+    <xs:complexType>
+      <xs:choice>         <!-- no way to discriminate SDHBW or SDHBE, so uncomment one -->
+        <!-- <xs:element ref="gma:SDHBEPDU" /> -->
+        <xs:element ref="gma:SDHBWPDU"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="SDHBWPDU">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="gma:SDHBWHeader"/>
+        <xs:element ref="gma:Stream"/>
+        <xs:element ref="gma:GapsTrailer"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="SDHBWHeader">
+    <xs:complexType>
+      <xs:sequence dfdl:byteOrder="bigEndian">
+        <xs:element name="tag0" type="gma:gapsuint8"/>
+        <xs:element name="tagm" type="gma:gapsuint8"/>
+        <xs:element name="tags" type="gma:gapsuint8"/>
+        <xs:element name="tagt" type="gma:gapsuint8"/>
+        <xs:element name="len" type="gma:gapsuint16"/>
+        <xs:element name="crc" type="gma:gapsuint16"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="GapsTrailer">
+    <xs:complexType>
+      <xs:sequence dfdl:byteOrder="bigEndian">
+        <xs:element name="seq" type="gma:gapsuint32"/>
+        <xs:element name="rqr" type="gma:gapsuint32"/>
+        <xs:element name="oid" type="gma:gapsuint32"/>
+        <xs:element name="mid" type="gma:gapsuint16"/>
+        <xs:element name="crc" type="gma:gapsuint16"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>

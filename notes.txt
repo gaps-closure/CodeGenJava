@@ -1,0 +1,1 @@
+The main method and the associated class should be specified in input JSON.

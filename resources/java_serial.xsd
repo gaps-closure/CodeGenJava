@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  GAPS/Closure DFDL Schema for Java Serilaized Objects
+
+  Defaults are derived from Daffodil DFDL Schema for PCAP
+  IEEE-754 encoding for double follows Daffodil DFDL Schema for shapeFile
+-->   
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:dfdl="http://www.ogf.org/dfdl/dfdl-1.0/"
+           xmlns:fn="http://www.w3.org/2005/xpath-functions"
+           xmlns:daf="urn:ogf:dfdl:2013:imp:daffodil.apache.org:2018:ext"
+           xmlns:gma="urn:gma:1.0"
+           targetNamespace="urn:gma:1.0">
+
+  <xs:element name="stream">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="magic" type="xs:short" />
+        <xs:element name="version" type="xs:short"/>
+        <xs:element minOccurs="1" maxOccurs="unbounded" type="content" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="content">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="object_" type="object"/>
+      <!-- blockdata -->      
+    </xs:choice>    
+  </xs:complexType>
+
+  <xs:complexType name="object">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="newObject"     type="newObject" />
+      <xs:element name="newClass"      type="newClass"/>
+      <xs:element name="newArray"      type="newArray"/>
+      <xs:element name="newString"     type="newString"/>
+      <xs:element name="newEnum"       type="newEnum"/>
+      <xs:element name="newClassDesc"  type="newClassDesc"/>
+      <xs:element name="prevObject"    type="prevObject"/>
+      <xs:element name="nullReference" type="nullReference"/>
+      <xs:element name="exception"     type="exception"/>
+      <xs:element name="TC_RESET"      type="xs:byte"/>
+    </xs:choice>    
+  </xs:complexType>
+  
+  <xs:complexType name="newClass">
+    <xs:sequence>
+      <xs:element name="TC_CLASS" type="xs:byte" />
+      <xs:element name="classDesc" type="classDesc"/>
+      <!-- newHandle -->      
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="classDesc">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="newClassDesc" type="newClassDesc" />
+      <xs:element name="nullReference" type="nullReference"/>
+      <xs:element name="prevObject" type="prevObject" />
+    </xs:choice>    
+  </xs:complexType>
+
+  <xs:complexType name="superClassDesc">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="classDesc" type="classDesc" />
+    </xs:choice>    
+  </xs:complexType>
+
+  <xs:complexType name="newClassDesc">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:sequence>
+        <xs:element name="TC_CLASSDESC" type="xs:byte" />
+        <xs:element name="className" type="utf"/>
+        <xs:element name="serialVersionUID" type="xs:long" />
+        <!-- newHandle -->
+        <xs:element name="classDescInfo" type="classDescInfo"/>
+      </xs:sequence>
+      <xs:sequence>
+        <xs:element name="TC_PROXYCLASSDESC" type="xs:byte" />
+        <!-- newHandle -->
+        <xs:element name="proxyClassDescInfo" type="proxyClassDescInfo"/>
+      </xs:sequence>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="classDescInfo">
+    <xs:sequence>
+      <xs:element name="classDescFlags" type="xs:byte" />
+      <xs:element name="fields" type="fields"/>
+      <xs:element name="classAnnotation" type="classAnnotation"/>
+      <xs:element name="superClassDesc" type="superClassDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="utf">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element name="Length0" type="xs:unsignedShort"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="2"
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{dfdl:valueLength(../Value0,'bytes')}"
+                  />
+      <xs:element minOccurs="1" name="Value0" type="xs:string"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="{../Length0}"
+                  dfdl:lengthUnits="bytes" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- serialVersionUID -->
+  <!-- classDescFlags -->
+  
+  <xs:complexType name="proxyClassDescInfo">
+    <xs:sequence>
+      <xs:element name="proxyInterfaceNames" type="proxyInterfaceNames" />
+      <xs:element name="classAnnotation" type="classAnnotation"/>
+      <xs:element name="superClassDesc" type="superClassDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="proxyInterfaceNames">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element name="arrayCount" type="xs:integer"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="2"
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{fn:count(../Numbers)}" />
+      <xs:element name="Numbers" type="utf"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="4"
+                  dfdl:lengthUnits="bytes" <!-- TODO -->
+                  minOccurs="0"
+                  maxOccurs="unbounded"
+                  dfdl:occursCountKind="expression"
+                  dfdl:occursCount="{../arrayCount}" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="fields">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element name="arrayCount" type="xs:short"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="2"
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{fn:count(../Numbers)}" />
+      <xs:element name="Numbers" type="fieldDesc"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="4"
+                  dfdl:lengthUnits="bytes" <!-- TODO -->
+                  minOccurs="0"
+                  maxOccurs="unbounded"
+                  dfdl:occursCountKind="expression"
+                  dfdl:occursCount="{../arrayCount}" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="fieldDesc">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="primitive" type="primitiveDesc"/>
+      <xs:element name="object" type="objectDesc"/>
+    </xs:choice>    
+  </xs:complexType>
+
+  <xs:complexType name="primitiveDesc">
+    <xs:sequence>
+      <xs:element name="prim_typecode" type="prim_typecode" />
+      <xs:element name="fieldName" type="fieldName" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="objectDesc">
+    <xs:sequence>
+      <xs:element name="obj_typecode" type="obj_typecode" />
+      <xs:element name="fieldName" type="utf" />
+      <xs:element name="className1" type="className1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="className1">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element minOccurs="1" name="TC_STRING" type="gma:gapsuint8" />
+      <xs:element name="Length2" type="xs:unsignedShort"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="2"
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{dfdl:valueLength(../Value2,'bytes')}"
+                  />
+      <xs:element minOccurs="1" name="Value2" type="xs:string"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="{../Length2}"
+                  dfdl:lengthUnits="bytes" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="classAnnotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" type="content" />
+      <xs:element name="endBlockData" type="xs:byte" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="prim_typecode">
+    <xs:restriction base="xsd:string">
+      <xs:pattern value="[BCDFIJSZ]"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="obj_typecode">
+    <xs:restriction base="xsd:string">
+      <xs:pattern value="[\[L]"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="newArray">
+    <xs:sequence>
+      <xs:element name="TC_ARRAY" type="xs:byte" />
+      <xs:element name="classDesc" type="classDesc"/>
+      <!-- newHandle -->
+      <xs:element name="size" type="xs:integer" />
+      <xs:element minOccurs="1" maxOccurs="unbounded" type="values"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="newObject">
+    <xs:sequence>
+      <xs:element name="TC_OBJECT" type="xs:byte" />
+      <xs:element name="classDesc" type="classDesc"/>
+      <!-- newHandle -->
+      <xs:element minOccurs="1" maxOccurs="unbounded" type="classdata"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="classdata">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:element name="nowrclass" type="nowrclass"/>
+      <xs:element name="wrclass" type="objectAnnotation"/>
+      <xs:element name="externalContents" type="externalContents"/>
+      <xs:element name="objectAnnotation" type="objectAnnotation"/>
+    </xs:choice>    
+  </xs:complexType>
+    
+  <xs:complexType name="nowrclass">
+    <xs:sequence>
+      <xs:element name="values" type="values" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="wrclass">
+    <xs:sequence>
+      <xs:element name="nowrclass" type="nowrclass" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="objectAnnotation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" type="content" />
+      <xs:element name="TC_ENDBLOCKDATA" type="xs:byte" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="blockdata">
+    <xs:sequence>
+      <xs:element name="blockdatashort" type="blockdatashort" />
+      <xs:element name="blockdatalong" type="blockdatalong" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="blockdatashort">
+    <xs:sequence>
+      <xs:element name="TC_BLOCKDATA" type="xs:byte" />
+      <xs:element name="size" type="xs:integer" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" type="xs:byte"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="blockdatalong">
+    <xs:sequence>
+      <xs:element name="TC_BLOCKDATALONG" type="xs:byte" />
+      <xs:element name="size" type="xs:integer" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" type="xs:byte"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- endBlockData -->
+  
+  <xs:complexType name="externalContent">
+    <xs:sequence>
+      <xs:element name="bytes" type="xs:integer" />
+      <xs:element name="object" type="object"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="externalContents">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" type="externalContent"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="newString">
+    <xs:choice minOccurs="1" maxOccurs="1">
+      <xs:complexType name="newClass">
+        <xs:sequence>
+          <xs:element name="TC_STRING" type="xs:byte" />
+          <!-- newHandle -->      
+          <xs:element name="utf" type="utf"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="newClass">
+        <xs:sequence>
+          <xs:element name="TC_LONGSTRING" type="xs:byte" />
+          <!-- newHandle -->      
+          <xs:element name="long_utf" type="long-utf"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:choice>    
+  </xs:complexType>
+
+  <xs:complexType name="long-utf">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element name="Length0" type="xs:unsignedLong"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="2" <!-- TODO -->
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{dfdl:valueLength(../Value0,'bytes')}"
+                  />
+      <xs:element minOccurs="1" name="Value0" type="xs:string"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="{../Length0}"
+                  dfdl:lengthUnits="bytes" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="newEnum">
+    <xs:sequence>
+      <xs:element name="TC_ENUM" type="xs:byte" />
+      <xs:element name="classDesc" type="classDesc"/>
+      <!-- newHandle -->      
+      <xs:element name="enumConstantName" type="enumConstantName"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="enumConstantName">
+    <xs:sequence>
+      <xs:element name="object" type="object" /> <!-- String? TODO -->
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="prevObject">
+    <xs:sequence>
+      <xs:element name="TC_REFERENCE" type="xs:byte" />
+      <xs:element name="handle" type="xs:integer"/>
+      <!-- newHandle -->      
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="nullReference">
+    <xs:sequence>
+      <xs:element name="TC_NULL" type="xs:byte" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="exception">
+    <xs:sequence>
+      <xs:element name="TC_EXCEPTION" type="xs:byte" />
+      <xs:element name="reset" type="reset" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- magic -->
+  <!-- version -->
+    
+  <xs:complexType name="values">
+    <xs:sequence>
+      <xs:element name="typeCode" type="xs:byte" />
+      <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element name="TC_CLASS" type="classDesc"/>
+        <xs:element name="TC_STRING" type="TC_STRING"/>
+        <xs:element name="prevObj" type="prevObject"/>
+        <!-- .... TODO -->
+      </xs:choice>    
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- newHandle -->
+
+  <xs:complexType name="reset">
+    <xs:sequence>
+      <xs:element name="TODO" type="xs:byte" />
+    </xs:sequence>
+  </xs:complexType>
+  
+</xs:schema>

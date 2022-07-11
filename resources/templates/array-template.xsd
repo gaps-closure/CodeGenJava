@@ -1,0 +1,13 @@
+  <xs:complexType name="###TYPE_ARRAY###">
+    <xs:sequence dfdl:byteOrder="bigEndian">
+      <xs:element name="arrayCount" type="xs:unsignedInt"
+                  dfdl:lengthKind="explicit"
+                  dfdl:length="4"
+                  dfdl:lengthUnits="bytes"
+                  dfdl:outputValueCalc="{fn:count(../Numbers)}"/>
+      <xs:element name="Numbers" type="###ELEMENT_TYPE###" dfdl:lengthKind="explicit"
+                  dfdl:length="###ELEMENT_SIZE###" dfdl:lengthUnits="bytes"
+                  minOccurs="0" maxOccurs="unbounded" dfdl:occursCountKind="expression"
+                  dfdl:occursCount="{../arrayCount}"/>
+    </xs:sequence>
+  </xs:complexType>

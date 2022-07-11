@@ -1,0 +1,2 @@
+com.peratonlabs.closure.testprog.example1.Extra.getValue 1 1 1
+com.peratonlabs.closure.testprog.example1.Extra.Extra 1 1 2

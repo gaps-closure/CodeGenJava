@@ -1,0 +1,68 @@
+
+    /******* fields *******/
+    // all instance field reads
+    Object around(##FQCN## myObject) : get(* ##FQCN##.##MemberName##)  && target(myObject) {
+        System.out.println(thisJoinPointStaticPart);
+
+        String fieldName = thisJoinPoint.getSignature().getName();
+        return ClosureShadow.readField(myObject, fieldName);
+    }
+    
+    // all static field reads
+    Object around() : get(static * ##FQCN##.##MemberName##) {
+        String className = thisJoinPointStaticPart.getSignature().getDeclaringTypeName();
+        String fieldName = thisJoinPoint.getSignature().getName();
+        
+        return ClosureShadow.readStaticField(className, fieldName);
+    }
+    
+    // all instance field writes
+    void around(##FQCN## myObject, Object value) : set(* ##FQCN##.##MemberName##)  && target(myObject) && args(value) {
+        System.out.println(thisJoinPointStaticPart);
+        
+        String fieldName = thisJoinPoint.getSignature().getName();
+        ClosureShadow.writeField(myObject, fieldName, value);
+    }
+    
+    // all static field writes
+    void around(##FQCN## value) : set(static * ##FQCN##.##MemberName##)  && args(value) {
+        String className = thisJoinPointStaticPart.getSignature().getDeclaringTypeName();
+        String fieldName = thisJoinPoint.getSignature().getName();
+        
+        ClosureShadow.writeStaticField(className, fieldName, value);
+    }
+    
+    // all field reads via reflection
+    Object around(##FQCN## myObject, Field field):
+        call(Object Field.get*(..)) && target(field) && args(myObject) && !within(##EnclaveName##)  {
+       
+        String fieldName = field.getName();
+        return ClosureShadow.readField(myObject, fieldName);
+    }
+    
+    // all field writes via reflection
+    void around(##FQCN## myObject, Object newValue, Field field): 
+         call(public void Field.set*(Object, *)) && args(myObject, newValue) && target(field) {
+        
+        String fieldName = field.getName();
+        ClosureShadow.writeField(myObject, fieldName, newValue);
+    }
+    
+    // all static field reads via reflection
+    Object around(Field field):
+        call(Object Field.get*(..)) && target(field) && !within(##EnclaveName##)  {
+       
+        String className = field.getClass().getName();
+        String fieldName = field.getName();
+        return ClosureShadow.readStaticField(className, fieldName);
+    }
+    
+    // all static field writes via reflection
+    void around(##FQCN## myObject, Object newValue, Field field): 
+         call(public void Field.set*(Object, *)) && args(myObject, newValue) && target(field) {
+        
+        String className = field.getClass().getName();
+        String fieldName = field.getName();
+        ClosureShadow.writeStaticField(className, fieldName, newValue);
+    }
+
