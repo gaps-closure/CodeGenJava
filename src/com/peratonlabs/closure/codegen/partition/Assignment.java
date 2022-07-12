@@ -13,6 +13,11 @@ public class Assignment
     private String className;
     private String enclave;
     
+    public Assignment(String className, String enclave) {
+        this.className = className;
+        this.enclave = enclave;
+    }
+    
     public String getClassName() {
         return className;
     }

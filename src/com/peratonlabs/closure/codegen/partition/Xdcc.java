@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import com.peratonlabs.closure.codegen.Utils;
 
 public class Xdcc
 {
@@ -38,6 +39,10 @@ public class Xdcc
             JsonReader reader = new JsonReader(new FileReader(designJsonFile)); //Util.getPath(mappingJsonFile)));
             Xdcc cleDesign = new Gson().fromJson(reader, Xdcc.class);
             
+            if (cleDesign.assignments == null) {
+                cleDesign.buildAssignments();
+            }
+            
             return cleDesign;
         }
         catch (IOException e) {
@@ -52,6 +57,16 @@ public class Xdcc
 //        logger.info("Design loaded from string" + designJson);
 
         return cleDesign;
+    }
+    
+    public void buildAssignments() {
+        assignments = new ArrayList<Assignment>();
+        for (Enclave enclave : enclaves) {
+            for (String clz : enclave.getAssignedClasses()) {
+                assignments.add(new Assignment(clz, enclave.getName()));
+                
+            }
+        }
     }
     
     public String assignedToEnclave(String fqcn) {
