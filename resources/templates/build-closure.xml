@@ -1,49 +1,52 @@
 <project name="Build app and aspect lib then weave" default="weave">
-	<property file="./build.properties"/>
-	
-	<taskdef classpath="${aspectj.home}/lib/aspectjtools.jar"
-	         resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties"/>
-	
-	<path id="project.class.path">
-	    <pathelement location="${aspectj.home}/lib/aspectjrt.jar"/>
-		<pathelement location="${aspectj.home}/lib/codeGen.jar"/>
-	    <pathelement location="dist/##APP_JAR##.jar"/>
-	</path>
+  <property file="./build.properties"/>
+  
+  <taskdef classpath="${aspectj.home}/lib/aspectjtools.jar"
+           resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties"/>
+  
+  <path id="project.class.path">
+      <pathelement location="${aspectj.home}/lib/aspectjrt.jar"/>
+      <pathelement location="${aspectj.home}/lib/codeGen.jar"/>
+      <pathelement location="dist/##APP_JAR##.jar"/>
+      <fileset dir="./lib">
+        <include name="**/*.jar" />
+      </fileset>
+  </path>
 
-	<!-- build the CLOSURE aspectj library -->
-	<target name="compile">
-		<mkdir dir="dist" />
-		<iajc 
-			source="1.5" 
-			classpathref="project.class.path" 
-			outjar="dist/closure-aspect.jar" 
-			xlintfile="xlint.properties">
-			<sourceroots>
-				<pathelement location="aspect" />
-			</sourceroots>
-		</iajc>
-	</target>
-	
-	<target name="initialize" depends="compile">
-		<mkdir dir="dist" />
-		<copy todir="dist">
-			<fileset dir="./dist">
-				<include name="##APP_JAR##.jar" />
-			</fileset>
-			<fileset dir="./dist">
-				<include name="closure-aspect.jar" />
-			</fileset>
-		</copy>
-	</target>
+  <!-- build the CLOSURE aspectj library -->
+  <target name="compile">
+    <mkdir dir="dist" />
+    <iajc 
+      source="1.5" 
+      classpathref="project.class.path" 
+      outjar="dist/closure-aspect.jar" 
+      xlintfile="xlint.properties">
+      <sourceroots>
+        <pathelement location="aspect" />
+      </sourceroots>
+    </iajc>
+  </target>
+  
+  <target name="initialize" depends="compile">
+    <mkdir dir="dist" />
+    <copy todir="dist">
+      <fileset dir="./dist">
+        <include name="##APP_JAR##.jar" />
+      </fileset>
+      <fileset dir="./dist">
+        <include name="closure-aspect.jar" />
+      </fileset>
+    </copy>
+  </target>
 
     <!-- weave the app and the CLOSURE aspectj library -->
-	<target name="weave" depends="initialize">
-		<mkdir dir="dist" />
-		<iajc injars="dist/##APP_JAR##.jar"
+  <target name="weave" depends="initialize">
+    <mkdir dir="dist" />
+    <iajc injars="dist/##APP_JAR##.jar"
                       aspectpath="dist/closure-aspect.jar"
                       outjar="dist/weaved-##APP_JAR##.jar"
                       classpathref="project.class.path">
-		</iajc>
-		<delete file="dist/##APP_JAR##.jar"/> 
-	</target>	
+    </iajc>
+    <delete file="dist/##APP_JAR##.jar"/> 
+  </target>  
 </project>

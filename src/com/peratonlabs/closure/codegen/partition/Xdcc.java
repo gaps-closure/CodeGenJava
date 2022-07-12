@@ -11,6 +11,7 @@ package com.peratonlabs.closure.codegen.partition;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 //import org.apache.log4j.Logger;
 
@@ -69,15 +70,19 @@ public class Xdcc
         }
     }
     
-    public String assignedToEnclave(String fqcn) {
-        if (assignments == null)
+    public HashSet<String> assignedToEnclave(String ownEnclave, String fqcn) {
+        if (assignments == null) {
+            System.err.println("assignedToEnclave: null assignment");
             return null;
-        
-        for (Assignment assignment : assignments) {
-            if (assignment.getClassName().equals(fqcn))
-                return assignment.getEnclave();
         }
-        return null;
+        
+        HashSet<String> set = new HashSet<String>();
+        for (Assignment assignment : assignments) {
+            if (assignment.getClassName().equals(fqcn) && !assignment.getEnclave().equals(ownEnclave)) {
+                set.add(assignment.getEnclave());
+            }
+        }
+        return set;
     }
     
     public String toJson(boolean pretty) {

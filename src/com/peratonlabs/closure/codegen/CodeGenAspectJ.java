@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import com.peratonlabs.closure.codegen.partition.Call;
 import com.peratonlabs.closure.codegen.partition.Cut;
@@ -42,14 +43,17 @@ public class CodeGenAspectJ
                     if (!call.getLevel().contentEquals(myLevel))  // I am not allowed to call
                         continue;
 
-                    String assigned = xdcc.assignedToEnclave(call.getType());
+                    Call callee = cut.getCallee();
+                    HashSet<String> assigned = xdcc.assignedToEnclave(myEnclaveName, callee.getType());
                     if (assigned == null) {
                         System.err.println("genAspectJ: null 'assigned' for " + cut.getMethodSignature().getName());
                         continue;
                     }
-                    if (assigned.equals(myEnclaveName))  // hosted by myself;
+                    if (assigned.isEmpty()) { // hosted by myself only
+                        // System.err.println(call.getType() + " not assigned to any enclave");
                         continue;
-
+                    }
+                    
                     MethodSignature signature = cut.getMethodSignature();
 
                     String fqcn = signature.getFqcn();
