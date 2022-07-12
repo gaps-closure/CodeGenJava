@@ -6,7 +6,8 @@
    
    "entry":{
       "mainClass":"com.peratonlabs.closure.eop2.video.manager.VideoManager",
-      "filepath":"src/com/peratonlabs/closure/eop2/video/VideoManager.java"
+      "filepath":"src/com/peratonlabs/closure/eop2/video/VideoManager.java",
+      "enclave": "Purple_E"
    },
    "enclaves":[
       {

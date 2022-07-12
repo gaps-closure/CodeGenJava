@@ -11,6 +11,7 @@
  */
 package com.peratonlabs.closure.codegen;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,6 +42,7 @@ public class CodeGenAspectJ
             String file = aspectDir + "/" + myEnclaveName + ".aj";
             FileWriter myWriter = openAspectJFile(file, myEnclaveName, templateDir + "/aspectj-imports.template");
 
+            boolean crossed = false;
             for (Cut cut : xdcc.getCuts()) {
                 for (Call call : cut.getAllowedCallers()) {
                     if (!call.getLevel().contentEquals(myLevel))  // I am not allowed to call
@@ -56,7 +58,8 @@ public class CodeGenAspectJ
                         // System.err.println(call.getType() + " not assigned to any enclave");
                         continue;
                     }
-                    
+                    crossed = true;
+                            
                     MethodSignature signature = cut.getMethodSignature();
 
                     String fqcn = signature.getFqcn();
@@ -87,7 +90,7 @@ public class CodeGenAspectJ
                     genDisallow(templateDir, fqcn, aspectDir, myEnclaveName);
                 }
             }
-            closeAspectJ(myWriter, file);
+            closeAspectJ(myWriter, file, crossed);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -220,11 +223,18 @@ public class CodeGenAspectJ
         }
     }
     
-    private static void closeAspectJ(FileWriter myWriter, String file) {
+    private static void closeAspectJ(FileWriter myWriter, String filename, boolean crossed) {
         try {
             myWriter.write("}\n");
             myWriter.close();
-            System.out.println("generated " + file);
+            
+            if (crossed)
+                System.out.println("generated " + filename);
+            else {
+                File file = new File(filename);
+                Files.deleteIfExists(file.toPath());
+            }
+                
         }
         catch (IOException e) {
             e.printStackTrace();
