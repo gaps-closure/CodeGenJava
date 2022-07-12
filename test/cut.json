@@ -1,5 +1,13 @@
 {
+   "jar":"TESTPROGRAM.jar",
+   "rootDir": "/home/tchen/eop2/eop2-demo",
    "codeDir":"eop2-demo",
+   "dstDir": "/tmp/xdcc",
+   
+   "entry":{
+      "mainClass":"void com.peratonlabs.closure.eop2.video.manager.VideoManager",
+      "filepath":"./examples/eop2-demo/src/com/peratonlabs/closure/eop2/video/VideoManager.java"
+   },
    "enclaves":[
       {
          "assignedClasses":[
@@ -43,10 +51,5 @@
          ],
          "name":"Green_E"
       }
-   ],
-   "entry":{
-      "mainClass":"void com.peratonlabs.closure.eop2.video.manager.VideoManager",
-      "filepath":"./examples/eop2-demo/src/com/peratonlabs/closure/eop2/video/VideoManager.java"
-   },
-   "jar":"TESTPROGRAM.jar"
+   ]
 }

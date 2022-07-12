@@ -33,10 +33,6 @@ public class CodeGenAspectJ
         try {
             String myEnclaveName = myEnclave.getName();
             String myLevel = myEnclave.getLevel();
-            if (myLevel == null) {
-                System.err.println("level must be specified for enclave: " + myEnclave.getName());
-                System.exit(1);;
-            }
 
             String file = aspectDir + "/" + myEnclaveName + ".aj";
             FileWriter myWriter = openAspectJFile(file, myEnclaveName, templateDir + "/aspectj-imports.template");

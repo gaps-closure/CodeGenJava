@@ -37,6 +37,10 @@ public class Xdconf
     
     public void populate(Xdcc xdcc) {
         ArrayList<Cut> cuts = xdcc.getCuts();
+        if (cuts == null) {
+            System.err.println("missing 'cuts'");
+            return;
+        }
         for (Cut cut : cuts) {
             Call call = cut.getCallee();
             String enclave = call.getLevel();

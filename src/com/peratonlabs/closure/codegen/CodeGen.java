@@ -63,6 +63,11 @@ public class CodeGen
             String parentDir = dst + "/" + xdcc.getCodeDir();
             String aspectDir = parentDir + "/aspect"; 
             
+            if (partition.getLevel() == null) {
+                System.err.println("level must be specified for enclave: " + partition.getName());
+                continue;
+            }
+            
             Utils.copyDir(common, parentDir, false);
             System.out.println("copied " + common + " to the " + enclave + " enclave");
                        
