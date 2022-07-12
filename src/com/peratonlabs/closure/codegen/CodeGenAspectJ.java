@@ -43,6 +43,10 @@ public class CodeGenAspectJ
                         continue;
 
                     String assigned = xdcc.assignedToEnclave(call.getType());
+                    if (assigned == null) {
+                        System.err.println("genAspectJ: null 'assigned' for " + cut.getMethodSignature().getName());
+                        continue;
+                    }
                     if (assigned.equals(myEnclaveName))  // hosted by myself;
                         continue;
 
