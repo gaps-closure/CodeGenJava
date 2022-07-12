@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import com.peratonlabs.closure.codegen.partition.Call;
@@ -29,6 +30,8 @@ import com.peratonlabs.closure.remote.ClosureShadow;
 public class CodeGenAspectJ
 {
 //    private static ArrayList<String> wovenClasses = new ArrayList<String>(); 
+    
+    private static HashMap<String, ArrayList<String>> disallows = new HashMap<String, ArrayList<String>>();
     
     public static void genAspectJ(Xdcc xdcc, Enclave myEnclave, String templateDir, String aspectDir) {
         try {
@@ -111,6 +114,11 @@ public class CodeGenAspectJ
     
     private static void genDisallow(String templateDir, String fqcn, String aspectDir, String enclave) {
         try {
+            ArrayList<String> gened = disallows.get(enclave);
+            if (gened != null && gened.contains(fqcn)) {
+                return;
+            }
+
             String template = templateDir + "/aspectj-disallow.template";
             int lastDot = fqcn.lastIndexOf(".");
             String className = fqcn.substring(lastDot + 1);
@@ -124,6 +132,12 @@ public class CodeGenAspectJ
             FileWriter myWriter = new FileWriter(file);
             myWriter.write(sCurrentLine);
             myWriter.close();
+            
+            if (gened == null) {
+                gened = new ArrayList<String>();
+                disallows.put(enclave, gened);
+            }
+            gened.add(fqcn);
             System.out.println("generated " + file);
         }
         catch (IOException e) {

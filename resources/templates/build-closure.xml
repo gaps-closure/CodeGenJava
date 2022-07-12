@@ -43,9 +43,9 @@
   <target name="weave" depends="initialize">
     <mkdir dir="dist" />
     <iajc injars="dist/##APP_JAR##.jar"
-                      aspectpath="dist/closure-aspect.jar"
-                      outjar="dist/weaved-##APP_JAR##.jar"
-                      classpathref="project.class.path">
+          aspectpath="dist/closure-aspect.jar"
+          outjar="dist/weaved-##APP_JAR##.jar"
+          classpathref="project.class.path">
     </iajc>
     <delete file="dist/##APP_JAR##.jar"/> 
   </target>  

@@ -85,6 +85,7 @@ public class CodeGen
                 ArrayList<String> ownedByPeer = peer.getAssignedClasses();
                 if (ownedByPeer != null && !ownedByPeer.isEmpty()) {
                     CodeGenAspectJ.genAspectJ(xdcc, partition, templateDir, aspectDir);
+                    break;
                 }
             }
             genIPC(templateDir, aspectDir, enclave);
