@@ -28,7 +28,7 @@ public class RPCObjectTag
         try (BufferedReader br = new BufferedReader(new FileReader("aspect/tags.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+//                System.out.println(line);
                 String[] fields = line.trim().split("\\s+");
                 if (fields.length < 4) {
                     System.err.println("bad tag: " + line);
