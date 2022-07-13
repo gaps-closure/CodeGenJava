@@ -1,0 +1,9 @@
+
+    // static method invocation/execution
+    Object around():
+        execution(static * ##FQCN##.##MethodName##(##ARGS##)) {
+        MethodSignature signature = (MethodSignature) thisJoinPoint.getSignature();
+
+        return ClosureShadow.invokeMethod(null, signature, thisJoinPoint.getArgs());
+    }
+    

@@ -73,8 +73,8 @@ public class CodeGenAspectJ
                     if (className.equals(methodName)) {
                         template = templateDir + "/aspectj-constructor.template";
                     }
-                    else { // TODO
-                        template = templateDir + "/aspectj-method.template";
+                    else { // TODO: static or instance
+                        template = templateDir + "/aspectj-method-static.template";
                     }
 
                     String lines = new String(Files.readAllBytes(Paths.get(template)));

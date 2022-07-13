@@ -18,7 +18,6 @@ import java.util.HashSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import com.peratonlabs.closure.codegen.Utils;
 
 public class Xdcc
 {

@@ -15,8 +15,6 @@ import java.util.HashMap;
 import org.aspectj.lang.reflect.ConstructorSignature;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import com.peratonlabs.closure.remote.ClosureRemote;
-
 public class ClosureShadow
 {
     public static final String myEnclave = "Orange";
