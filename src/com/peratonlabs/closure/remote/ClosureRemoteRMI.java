@@ -108,7 +108,7 @@ public class ClosureRemoteRMI implements ClosureRemote
                 return null; 
             }
             if (isStatic)
-                val = method.invoke(args);
+                val = method.invoke(null, args);
             else
                 val = method.invoke(obj, args);
             
