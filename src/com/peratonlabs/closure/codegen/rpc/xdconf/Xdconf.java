@@ -128,6 +128,20 @@ public class Xdconf
         }
     }
     
+    public void genPubDst(FileWriter myWriter) {
+        try {
+            myWriter.write("\n");
+            for (XdMap xdMap : xdMaps) {
+                String name = xdMap.getName();
+                if (!name.endsWith("_rsp"))
+                    myWriter.write(xdMap.getName() + " " + xdMap.getFrom() + " " + xdMap.getTo() + "\n");
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public XdEnclave findEnclave(String name) {
         for (XdEnclave xdEnclave : enclaves) {
             if (xdEnclave.getEnclave().contentEquals(name)) {

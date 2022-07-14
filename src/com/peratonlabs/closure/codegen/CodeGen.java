@@ -88,7 +88,7 @@ public class CodeGen
                     break;
                 }
             }
-            genIPC(templateDir, aspectDir, enclave);
+            genIPC(xdconf, templateDir, aspectDir, enclave);
             xdconf.genTags(aspectDir + "/tags.txt");
             genBuildScript(templateDir, parentDir, xdcc.getJar());
         }
@@ -117,7 +117,7 @@ public class CodeGen
         }
     }
 
-    private void genIPC(String templateDir, String aspectDir, String enclave) {
+    private void genIPC(Xdconf xdconf, String templateDir, String aspectDir, String enclave) {
         try (BufferedReader br = new BufferedReader(new FileReader(templateDir + "/ipc.txt"))) {
             String inUri = br.readLine().trim() + enclave.toLowerCase() + "\n";
             String outUri = br.readLine().trim() + enclave.toLowerCase() + "\n";
@@ -126,6 +126,9 @@ public class CodeGen
             FileWriter myWriter = new FileWriter(file);
             myWriter.write(inUri);
             myWriter.write(outUri);
+            
+            xdconf.genPubDst(myWriter);
+            
             myWriter.close();
             System.out.println("generated " + file);
         }
