@@ -14,13 +14,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.HashSet;
 
 //import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import com.peratonlabs.closure.codegen.CodeGenAspectJ;
 import com.peratonlabs.closure.codegen.partition.Call;
 import com.peratonlabs.closure.codegen.partition.Cut;
 import com.peratonlabs.closure.codegen.partition.Enclave;
@@ -36,6 +37,8 @@ public class Xdconf
     }
     
     public void populate(Xdcc xdcc) {
+        XdMap.cartneq(xdcc);
+        
         ArrayList<Cut> cuts = xdcc.getCuts();
         if (cuts == null) {
             System.err.println("missing 'cuts'");
@@ -43,33 +46,37 @@ public class Xdconf
         }
         for (Cut cut : cuts) {
             Call call = cut.getCallee();
-            String enclave = call.getLevel();
+            String toLevel = call.getLevel();
             MethodSignature signature = cut.getMethodSignature();
             String sigStr = signature.toString();
-            int mux = XdMap.getMux(enclave);
-            int sec = mux;
-            int typ = XdMap.getType(enclave, sigStr);
+            
+//            int mux = XdMap.getMux(enclave);
+//            int sec = mux;
+//            int typ = XdMap.getType(enclave, sigStr);
             
             for (Call caller : cut.getAllowedCallers()) {
-                XdMap xdMap = new XdMap(enclave, mux, sec, typ);
-                String callerEnvlave = caller.getLevel();
-                xdMap.setFrom(callerEnvlave);
+                String fromLevel = caller.getLevel();
+                
+                int sec = XdMap.getSec(fromLevel, toLevel);
+                int mux = sec;
+                int typ = XdMap.getType(toLevel, sigStr);
+                
+                XdMap xdMap = new XdMap(toLevel, mux, sec, typ);
+                xdMap.setFrom(fromLevel);
                 xdMap.setName(sigStr);
                 
                 xdMaps.add(xdMap);
                 
-//                if (signature.getReturnType() != null) {
-                	
                 String rsp = sigStr + "_rsp";
-                	mux = XdMap.getMux(callerEnvlave);
-                	sec = mux;
-                	typ = XdMap.getType(callerEnvlave, rsp);
-                    xdMap = new XdMap(callerEnvlave, mux, sec, typ);
-                    xdMap.setFrom(enclave);
-                    xdMap.setName(rsp); // + signature.getReturnType());
-                    
-                    xdMaps.add(xdMap);
-//                }
+                sec = XdMap.getSec(toLevel, fromLevel);
+                mux = sec;
+                typ = XdMap.getType(fromLevel, rsp);
+                
+                xdMap = new XdMap(fromLevel, mux, sec, typ);
+                xdMap.setFrom(toLevel);
+                xdMap.setName(rsp); // + signature.getReturnType());
+
+                xdMaps.add(xdMap);
             }
         }
     }
@@ -94,18 +101,22 @@ public class Xdconf
     		String outUri = br.readLine().trim();
 
     		for (Enclave enclave : xdcc.getEnclaves()) {
-    			String name = enclave.getName();
-    			String sub = inUri + name.toLowerCase();
-    			String pub = outUri + name.toLowerCase();
-    			XdEnclave xdEnclave = new XdEnclave(name, sub, pub);
+    		    String name = enclave.getName();
+    		    String sub = inUri + name.toLowerCase();
+    		    String pub = outUri + name.toLowerCase();
+    		    XdEnclave xdEnclave = new XdEnclave(name, sub, pub);
 
-    			ArrayList<XdMap> myMaps = new ArrayList<XdMap>();
-    			for (XdMap xdMap : xdMaps) {
-    				XdMap myXdMap = new XdMap(xdMap);
-    				myMaps.add(myXdMap);
-    			}
-    			xdEnclave.setHalmaps(myMaps);
-    			enclaves.add(xdEnclave);
+    		    ArrayList<XdMap> myMaps = new ArrayList<XdMap>();
+    		    for (XdMap xdMap : xdMaps) {
+    		        XdMap myXdMap = new XdMap(xdMap);
+    		        
+    		        if (!xdMap.getFrom().equals(enclave.getLevel()) &&
+    		            !xdMap.getTo().equals(enclave.getLevel()) )
+    		            continue;
+    		        myMaps.add(myXdMap);
+    		    }
+    		    xdEnclave.setHalmaps(myMaps);
+    		    enclaves.add(xdEnclave);
     		}
 
     		try {
@@ -176,5 +187,4 @@ public class Xdconf
         
         return gson.toJson(this);
     }
-
 }
