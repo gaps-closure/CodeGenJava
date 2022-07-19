@@ -70,7 +70,7 @@ public class CodeGen
         for (Enclave partition : xdcc.getEnclaves()) {
             String enclave = partition.getName();
             String dst = config.getDstDir() + "/" + enclave;
-            String parentDir = dst + "/" + xdcc.getCodeDir();
+            String parentDir = dst + "/" + config.getCodeDir();
             String aspectDir = parentDir + "/aspect"; 
             
             if (partition.getLevel() == null) {

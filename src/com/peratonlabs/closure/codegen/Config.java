@@ -16,6 +16,7 @@ import java.io.FileReader;
 public class Config
 {
     private String srcDir = "/home/tchen/eop2/eop2-demo-clean";
+    private String codeDir = ".";   // root directory of the source (same or sub-directory of the src)
     private String dstDir = "/tmp/xdcc";
     private String cut = "test/cut-eop2.json";
     
@@ -56,5 +57,13 @@ public class Config
 
     public void setSrcDir(String srcDir) {
         this.srcDir = srcDir;
+    }
+
+    public String getCodeDir() {
+        return codeDir;
+    }
+
+    public void setCodeDir(String codeDir) {
+        this.codeDir = codeDir;
     }
 }
