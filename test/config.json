@@ -1,4 +1,4 @@
 {
   "dstDir": "/tmp/xdcc",
-  "cut": "test/cut-eop2.json"
+  "cut": "test/original.json"
 }

@@ -45,10 +45,10 @@
       }
    ],
    "entry":{
-      "mainClass":"void com.peratonlabs.closure.eop2.video.manager.VideoManager",
+      "mainClass":"com.peratonlabs.closure.eop2.video.manager.VideoManager",
       "filepath":"./examples/eop2-demo/src/com/peratonlabs/closure/eop2/video/VideoManager.java"
    },
-   "jar":"TESTPROGRAM.jar",
+   "jar":"TESTPROGRAM",
    "cuts":[
       {
          "callee":{

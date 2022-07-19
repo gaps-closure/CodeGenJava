@@ -36,10 +36,8 @@ public class Xdcc
             JsonReader reader = new JsonReader(new FileReader(designJsonFile)); //Util.getPath(mappingJsonFile)));
             Xdcc cleDesign = new Gson().fromJson(reader, Xdcc.class);
             
-            if (cleDesign.assignments == null) {
-                cleDesign.buildAssignments();
-            }
-            
+            cleDesign.normalize();
+            System.out.println(cleDesign.toJson(true));
             return cleDesign;
         }
         catch (IOException e) {
@@ -56,12 +54,23 @@ public class Xdcc
         return cleDesign;
     }
     
-    public void buildAssignments() {
-        assignments = new ArrayList<Assignment>();
-        for (Enclave enclave : enclaves) {
-            for (String clz : enclave.getAssignedClasses()) {
-                assignments.add(new Assignment(clz, enclave.getName()));
+    public void normalize() {
+        if (assignments == null) {
+            assignments = new ArrayList<Assignment>();
+            for (Enclave enclave : enclaves) {
+                for (String clz : enclave.getAssignedClasses()) {
+                    assignments.add(new Assignment(clz, enclave.getName()));
+                }
             }
+        }
+        for (Enclave enclave : enclaves) {
+            String level = enclave.getLevel();
+            if (level != null)
+                continue;
+            String name = enclave.getName();
+            level = name.substring(0, name.length() - 2);
+            level = level.toLowerCase();
+            enclave.setLevel(level);
         }
     }
     
