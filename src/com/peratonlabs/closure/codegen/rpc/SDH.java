@@ -20,13 +20,13 @@ public class SDH
 {
     public static final int SIZE_OF_DATA_LEN_INT = 4;  // sizeof(dataLen)
     
-    public static final int ADU_SIZE_MAX_C = 2000;
+    public static final int ADU_SIZE_MAX_C = 200000;
     public static final int MAX_DATA_TYP_MAX = 200;
     public static final int RX_FILTER_LEN = 12;
     
-    GapsTag tag = new GapsTag();
-    int dataLen = -1;
-    byte[] data = new byte[ADU_SIZE_MAX_C];
+    private GapsTag tag = new GapsTag();
+    private int dataLen = -1;
+    private byte[] data = new byte[ADU_SIZE_MAX_C];
     
     public byte[] encode() throws FailToEncodeException {
         Offset offset = Offset.newInstance();
