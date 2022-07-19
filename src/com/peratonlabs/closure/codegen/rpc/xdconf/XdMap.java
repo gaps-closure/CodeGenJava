@@ -115,19 +115,20 @@ public class XdMap
             }
         }
         
+        System.out.println("MUX");
         for (String key : encPairs.keySet()) {
             HashMap<String, Integer>  encMap = encPairs.get(key);
             for (String k2 : encMap.keySet()) {
                 Integer i = encMap.get(k2);
-                System.out.println("========== " + key + " " + k2 + " " + i);
+                System.out.println(String.format("%10s %10s %3d", key, k2, i));
             }
         }
-        
+        System.out.println("SEC");
         for (String key : levelPairs.keySet()) {
             HashMap<String, Integer>  encMap = levelPairs.get(key);
             for (String k2 : encMap.keySet()) {
                 Integer i = encMap.get(k2);
-                System.out.println("========== " + key + " " + k2 + " " + i);
+                System.out.println(String.format("%10s %10s %3d", key, k2, i));
             }
         }
     }
