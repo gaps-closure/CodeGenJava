@@ -1,4 +1,8 @@
 {
   "dstDir": "/tmp/xdcc",
-  "cut": "test/original.json"
+  "cut": "test/original.json",
+  
+  "srcDir": "/home/tchen/eop2/eop2-demo-clean",
+  "codeDir": ".",
+  "jar": "ClosureVideo"
 }

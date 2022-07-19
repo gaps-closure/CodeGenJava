@@ -36,7 +36,7 @@ public class Xdcc
             Xdcc cleDesign = new Gson().fromJson(reader, Xdcc.class);
             
             cleDesign.normalize();
-            System.out.println(cleDesign.toJson(true));
+            
             return cleDesign;
         }
         catch (IOException e) {
