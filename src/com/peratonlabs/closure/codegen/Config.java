@@ -16,9 +16,10 @@ import java.io.FileReader;
 public class Config
 {
     private String srcDir = "/home/tchen/eop2/eop2-demo-clean";
-    private String codeDir = ".";   // root directory of the source (same or sub-directory of the src)
+    private String codeDir = ".";              // root directory of the source (same or sub-directory of the src)
     private String dstDir = "/tmp/xdcc";
     private String cut = "test/cut-eop2.json";
+    private String jar = "TESTPROGRAM";        // JAR name without the extension
     
     public Config() {
     }
@@ -65,5 +66,13 @@ public class Config
 
     public void setCodeDir(String codeDir) {
         this.codeDir = codeDir;
+    }
+
+    public String getJar() {
+        return jar;
+    }
+
+    public void setJar(String jar) {
+        this.jar = jar;
     }
 }

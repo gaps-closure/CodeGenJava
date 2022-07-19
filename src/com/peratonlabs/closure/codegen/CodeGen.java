@@ -100,7 +100,7 @@ public class CodeGen
             }
             genIPC(xdconf, templateDir, aspectDir, enclave);
             xdconf.genTags(aspectDir + "/tags.txt");
-            genBuildScript(templateDir, parentDir, xdcc.getJar());
+            genBuildScript(templateDir, parentDir, config.getJar());
         }
         
         xdconf.gen(config, xdcc, templateDir); 

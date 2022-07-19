@@ -23,7 +23,6 @@ public class Xdcc
 {
 //    private static final Logger logger = Logger.getLogger(Xdcc.class);
     
-    private String jar;       // JAR name without the extension
     private Entry entry;      // program entry point
     
     private ArrayList<Assignment> assignments;
@@ -122,14 +121,6 @@ public class Xdcc
             gson = new GsonBuilder().create();
         
         return gson.toJson(this);
-    }
-
-    public String getJar() {
-        return jar;
-    }
-
-    public void setJar(String jar) {
-        this.jar = jar;
     }
 
     public ArrayList<Enclave> getEnclaves() {
