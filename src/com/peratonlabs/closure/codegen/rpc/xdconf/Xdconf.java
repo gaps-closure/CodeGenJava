@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.peratonlabs.closure.codegen.CodeGenAspectJ;
+import com.peratonlabs.closure.codegen.Config;
 import com.peratonlabs.closure.codegen.partition.Call;
 import com.peratonlabs.closure.codegen.partition.Cut;
 import com.peratonlabs.closure.codegen.partition.Enclave;
@@ -100,7 +101,7 @@ public class Xdconf
         }
     }
     
-    public void gen(Xdcc xdcc, String templateDir) {
+    public void gen(Config config, Xdcc xdcc, String templateDir) {
     	try (BufferedReader br = new BufferedReader(new FileReader(templateDir + "/ipc.txt"))) {
     		String inUri = br.readLine().trim();
     		String outUri = br.readLine().trim();
@@ -125,15 +126,15 @@ public class Xdconf
     		}
 
     		try {
-    			String filename = xdcc.getDstDir() + "/" + "xdconf.ini";
-    			FileWriter myWriter;
-    			myWriter = new FileWriter(filename);
-    			myWriter.write(toJson(true));
-    			myWriter.close();
-    			System.out.println("generated " + filename);
+    		    String filename = config.getDstDir() + "/" + "xdconf.ini";
+    		    FileWriter myWriter;
+    		    myWriter = new FileWriter(filename);
+    		    myWriter.write(toJson(true));
+    		    myWriter.close();
+    		    System.out.println("generated " + filename);
     		}
     		catch (IOException e) {
-    			e.printStackTrace();
+    		    e.printStackTrace();
     		}
     	}
         catch (FileNotFoundException e) {

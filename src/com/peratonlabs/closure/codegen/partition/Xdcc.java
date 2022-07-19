@@ -26,7 +26,6 @@ public class Xdcc
     private String jar;       // JAR name without the extension
     private String rootDir;   // root directory of the project
     private String codeDir;   // root directory of the source (same or sub-directory of the root)
-    private String dstDir;    // where all enclaves will be generated
     private Entry entry;      // program entry point
     
     private ArrayList<Assignment> assignments;
@@ -132,14 +131,6 @@ public class Xdcc
 
     public void setRootDir(String srcDir) {
         this.rootDir = srcDir;
-    }
-
-    public String getDstDir() {
-        return dstDir;
-    }
-
-    public void setDstDir(String dstDir) {
-        this.dstDir = dstDir;
     }
 
     public ArrayList<Enclave> getEnclaves() {

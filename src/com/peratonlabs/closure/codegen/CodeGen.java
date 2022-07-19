@@ -24,16 +24,18 @@ import com.peratonlabs.closure.codegen.rpc.xdconf.Xdconf;
 
 public class CodeGen
 {
+    private Config config;
+    
     public static void main(String[] args) {
-        if (args.length < 1) {
-            System.err.println("Usage: <this program> <input json>");
-            return;
-        }
         CodeGen codeGen = new CodeGen();
-        codeGen.generate(args[0]);
+        codeGen.getOpts(args);
+        
+        codeGen.generate();
     }
     
-    private void generate(String spec) {
+    private void generate() {
+        String spec = config.getCut();
+        
         Xdcc xdcc = Xdcc.load(spec);
         if (xdcc == null) {
             System.err.println("Can't load " + spec);
@@ -43,7 +45,7 @@ public class CodeGen
         
         // make a copy of the original code for each enclave
         for (Enclave partition : xdcc.getEnclaves()) {
-            String dst = xdcc.getDstDir() + "/" + partition.getName();
+            String dst = config.getDstDir() + "/" + partition.getName();
             Utils.copyDir(xdcc.getRootDir(), dst, true);
             System.out.println("copied original code to the " + partition.getName() + " enclave");
         }
@@ -67,7 +69,7 @@ public class CodeGen
         
         for (Enclave partition : xdcc.getEnclaves()) {
             String enclave = partition.getName();
-            String dst = xdcc.getDstDir() + "/" + enclave;
+            String dst = config.getDstDir() + "/" + enclave;
             String parentDir = dst + "/" + xdcc.getCodeDir();
             String aspectDir = parentDir + "/aspect"; 
             
@@ -101,7 +103,7 @@ public class CodeGen
             genBuildScript(templateDir, parentDir, xdcc.getJar());
         }
         
-        xdconf.gen(xdcc, templateDir); 
+        xdconf.gen(config, xdcc, templateDir); 
     }
 
     private void genBuildScript(String templateDir, String buildDir, String appJar) {
@@ -145,6 +147,36 @@ public class CodeGen
         }
         catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    
+    private void getOpts(String[] args) {
+        String arg;
+        
+        for (int i = 0; i < args.length; i++) {
+            arg = args[i];
+            switch (arg) {
+            case "--dstDir":
+            case "-d":
+                if (config == null) {
+                    config = new Config();
+                }
+                config.setDstDir(args[++i]);
+                break;
+            case "--cutJson":
+            case "-c":
+                if (config == null) {
+                    config = new Config();
+                }
+                config.setCut(args[++i]);
+                break;                
+            default:
+                System.err.println("unknown option: " + arg);
+                break;
+            }
+        }
+        if (config == null) {  // all defaults
+            config = new Config();
         }
     }
 }

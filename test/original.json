@@ -1,13 +1,5 @@
 {
-   "jar":"TESTPROGRAM",
-   "rootDir": "/home/tchen/eop2/eop2-demo-clean",
-   "codeDir":".",
-   "dstDir": "/tmp/xdcc",
-   
-   "entry":{
-      "mainClass":"com.peratonlabs.closure.eop2.video.manager.VideoManager",
-      "filepath":"src/com/peratonlabs/closure/eop2/video/VideoManager.java"
-   },
+   "codeDir":"eop2-demo",
    "enclaves":[
       {
          "assignedClasses":[
@@ -23,8 +15,7 @@
             "com.peratonlabs.closure.eop2.camera.CameraReader",
             "com.peratonlabs.closure.eop2.camera.CameraType"
          ],
-         "name":"Purple_E",
-         "level":"purple"
+         "name":"Purple_E"
       },
       {
          "assignedClasses":[
@@ -37,8 +28,7 @@
             "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh",
             "com.peratonlabs.closure.eop2.level.high.VideoServerHigh"
          ],
-         "name":"Orange_E",
-         "level":"orange"
+         "name":"Orange_E"
       },
       {
          "assignedClasses":[
@@ -51,10 +41,14 @@
             "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal",
             "com.peratonlabs.closure.eop2.level.normal.VideoServerNormal"
          ],
-         "name":"Green_E",
-         "level":"green"
+         "name":"Green_E"
       }
    ],
+   "entry":{
+      "mainClass":"void com.peratonlabs.closure.eop2.video.manager.VideoManager",
+      "filepath":"./examples/eop2-demo/src/com/peratonlabs/closure/eop2/video/VideoManager.java"
+   },
+   "jar":"TESTPROGRAM.jar",
    "cuts":[
       {
          "callee":{
