@@ -47,6 +47,9 @@ public class Xdconf
         for (Cut cut : cuts) {
             Call call = cut.getCallee();
             String toLevel = call.getLevel();
+            Enclave enclaveTo = xdcc.findEnclaveByLevel(toLevel);
+            String enclaveToName = enclaveTo.getName();
+            
             MethodSignature signature = cut.getMethodSignature();
             String sigStr = signature.toString();
             
@@ -56,24 +59,26 @@ public class Xdconf
             
             for (Call caller : cut.getAllowedCallers()) {
                 String fromLevel = caller.getLevel();
+                Enclave enclaveFrom = xdcc.findEnclaveByLevel(fromLevel);
+                String enclaveFromName = enclaveFrom.getName();
                 
-                int sec = XdMap.getSec(fromLevel, toLevel);
+                int sec = XdMap.getSec(enclaveFromName, enclaveToName);
                 int mux = sec;
-                int typ = XdMap.getType(toLevel, sigStr);
+                int typ = XdMap.getType(enclaveToName, sigStr);
                 
-                XdMap xdMap = new XdMap(toLevel, mux, sec, typ);
-                xdMap.setFrom(fromLevel);
+                XdMap xdMap = new XdMap(enclaveToName, mux, sec, typ);
+                xdMap.setFrom(enclaveFromName);
                 xdMap.setName(sigStr);
                 
                 xdMaps.add(xdMap);
                 
                 String rsp = sigStr + "_rsp";
-                sec = XdMap.getSec(toLevel, fromLevel);
+                sec = XdMap.getSec(enclaveToName, enclaveFromName);
                 mux = sec;
                 typ = XdMap.getType(fromLevel, rsp);
                 
-                xdMap = new XdMap(fromLevel, mux, sec, typ);
-                xdMap.setFrom(toLevel);
+                xdMap = new XdMap(enclaveFromName, mux, sec, typ);
+                xdMap.setFrom(enclaveToName);
                 xdMap.setName(rsp); // + signature.getReturnType());
 
                 xdMaps.add(xdMap);
@@ -110,8 +115,8 @@ public class Xdconf
     		    for (XdMap xdMap : xdMaps) {
     		        XdMap myXdMap = new XdMap(xdMap);
     		        
-    		        if (!xdMap.getFrom().equals(enclave.getLevel()) &&
-    		            !xdMap.getTo().equals(enclave.getLevel()) )
+    		        if (!xdMap.getFrom().equals(enclave.getName()) &&
+    		            !xdMap.getTo().equals(enclave.getName()) )
     		            continue;
     		        myMaps.add(myXdMap);
     		    }

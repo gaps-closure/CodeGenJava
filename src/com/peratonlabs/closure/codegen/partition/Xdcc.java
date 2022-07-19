@@ -69,6 +69,16 @@ public class Xdcc
         }
     }
     
+    // TODO: this does not make sense, it should be the other way around.
+    // but enclave is needed, not level, from the cuts.
+    public Enclave findEnclaveByLevel(String level) {
+        for (Enclave enclave : enclaves) {
+            if (enclave.getLevel().equals(level))
+                return enclave;
+        }
+        return null;
+    }
+    
     public HashSet<String> assignedToEnclave(String ownEnclave, String fqcn) {
         if (assignments == null) {
             System.err.println("assignedToEnclave: null assignment");

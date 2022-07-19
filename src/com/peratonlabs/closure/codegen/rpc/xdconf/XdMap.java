@@ -89,15 +89,14 @@ public class XdMap
                 encPairs.put(name, encMap);
             }
             
-            HashMap<String, Integer> levelMap = levelPairs.get(level);
+            HashMap<String, Integer> levelMap = levelPairs.get(name);
             if (levelMap == null) {
                 levelMap = new HashMap<String, Integer>();
-                levelPairs.put(level, levelMap);
+                levelPairs.put(name, levelMap);
             }
             
             for (Enclave encInner : xdcc.getEnclaves()) {
                 String nameInner = encInner.getName();
-                String levelInner = encInner.getLevel();
                 if (nameInner.equals(name))
                     continue;
                 
@@ -107,10 +106,11 @@ public class XdMap
                     encMap.put(nameInner, mux);
                 }
                 
-                Integer sec = levelMap.get(levelInner);
+                String levelInner = encInner.getLevel();
+                Integer sec = levelMap.get(nameInner);
                 if (sec == null) {
                     sec = levelLinks++;
-                    levelMap.put(levelInner, sec);
+                    levelMap.put(nameInner, sec);
                 }
             }
         }
