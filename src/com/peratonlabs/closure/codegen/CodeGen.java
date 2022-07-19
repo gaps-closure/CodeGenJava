@@ -150,12 +150,29 @@ public class CodeGen
         }
     }
     
+    private void usage() {
+        System.out.println("-h/--help    \t this help");
+        System.out.println("-c/--cutJson \t cut JSON file");
+        System.out.println("-d/--dstDir  \t destination directory of the generated code");
+        System.out.println("-f/--config  \t config JSON file");
+        System.out.println("-i/--codeDir \t code directory (def is .), relative to srcDir)");
+        System.out.println("-j/--jar /   \t name of the application jar file");
+        System.out.println("-s/--srcDir  \t application source code");
+        System.exit(0);
+    }
+    
     private void getOpts(String[] args) {
         String arg;
         
         for (int i = 0; i < args.length; i++) {
             arg = args[i];
+            
             switch (arg) {
+            case "--help":
+            case "-h":
+                usage();
+                break;
+                
             case "--dstDir":
             case "-d":
                 if (config == null) {
@@ -163,6 +180,31 @@ public class CodeGen
                 }
                 config.setDstDir(args[++i]);
                 break;
+                
+            case "--srcDir":
+            case "-s":
+                if (config == null) {
+                    config = new Config();
+                }
+                config.setSrcDir(args[i++]);
+                break; 
+                
+            case "--codeDir":
+            case "-i":
+                if (config == null) {
+                    config = new Config();
+                }
+                config.setCodeDir(args[i++]);
+                break; 
+                
+            case "--jar":
+            case "-j":
+                if (config == null) {
+                    config = new Config();
+                }
+                config.setJar(args[++i]);
+                break; 
+                
             case "--cutJson":
             case "-c":
                 if (config == null) {
@@ -170,6 +212,8 @@ public class CodeGen
                 }
                 config.setCut(args[++i]);
                 break; 
+                
+                
             case "--config":
             case "-f":
                 if (config != null) {
