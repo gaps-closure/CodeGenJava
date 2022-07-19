@@ -169,7 +169,15 @@ public class CodeGen
                     config = new Config();
                 }
                 config.setCut(args[++i]);
-                break;                
+                break; 
+            case "--config":
+            case "-f":
+                if (config != null) {
+                    System.err.println("-f must be used as the first option.");
+                    System.exit(1);;
+                }
+                config = Config.load(args[++i]);
+                break;
             default:
                 System.err.println("unknown option: " + arg);
                 break;

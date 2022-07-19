@@ -28,6 +28,7 @@ public class Config
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.exit(1);
         }
         return null;
     }
