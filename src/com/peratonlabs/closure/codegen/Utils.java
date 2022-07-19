@@ -42,7 +42,9 @@ public class Utils
             });
         }
         catch (Exception e) {
+            System.err.println("srcDir= " + srcDir + " dstDir=" + dstDir);
             e.printStackTrace();
+            System.exit(1);
         }
     }
     

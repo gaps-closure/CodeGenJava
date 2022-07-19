@@ -24,7 +24,6 @@ public class Xdcc
 //    private static final Logger logger = Logger.getLogger(Xdcc.class);
     
     private String jar;       // JAR name without the extension
-    private String rootDir;   // root directory of the project
     private String codeDir;   // root directory of the source (same or sub-directory of the root)
     private Entry entry;      // program entry point
     
@@ -123,14 +122,6 @@ public class Xdcc
 
     public void setJar(String jar) {
         this.jar = jar;
-    }
-
-    public String getRootDir() {
-        return rootDir;
-    }
-
-    public void setRootDir(String srcDir) {
-        this.rootDir = srcDir;
     }
 
     public ArrayList<Enclave> getEnclaves() {

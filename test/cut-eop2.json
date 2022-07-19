@@ -1,6 +1,5 @@
 {
    "jar":"TESTPROGRAM",
-   "rootDir": "/home/tchen/eop2/eop2-demo-clean",
    "codeDir":".",
    
    "entry":{

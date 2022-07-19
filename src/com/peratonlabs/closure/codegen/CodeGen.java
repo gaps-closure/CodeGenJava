@@ -46,7 +46,7 @@ public class CodeGen
         // make a copy of the original code for each enclave
         for (Enclave partition : xdcc.getEnclaves()) {
             String dst = config.getDstDir() + "/" + partition.getName();
-            Utils.copyDir(xdcc.getRootDir(), dst, true);
+            Utils.copyDir(config.getSrcDir(), dst, true);
             System.out.println("copied original code to the " + partition.getName() + " enclave");
         }
         

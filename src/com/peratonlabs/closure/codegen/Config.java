@@ -15,6 +15,7 @@ import java.io.FileReader;
 
 public class Config
 {
+    private String srcDir = "/home/tchen/eop2/eop2-demo-clean";
     private String dstDir = "/tmp/xdcc";
     private String cut = "test/cut-eop2.json";
     
@@ -47,5 +48,13 @@ public class Config
 
     public void setCut(String cut) {
         this.cut = cut;
+    }
+
+    public String getSrcDir() {
+        return srcDir;
+    }
+
+    public void setSrcDir(String srcDir) {
+        this.srcDir = srcDir;
     }
 }
