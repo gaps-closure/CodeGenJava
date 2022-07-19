@@ -56,6 +56,14 @@ public class CodeGen
         xdconf.populate(xdcc);
         Entry entry = xdcc.getEntry();
         String master = entry.getEnclave();
+        if (master == null) {
+            master = xdcc.findMaster();
+            if (master != null)
+                System.out.println(master + " is the master enclave.");
+            else {
+                System.err.println("could not determine the master enclave");
+            }
+        }
         
         for (Enclave partition : xdcc.getEnclaves()) {
             String enclave = partition.getName();

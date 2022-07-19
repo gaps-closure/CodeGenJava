@@ -64,9 +64,22 @@ public class Xdcc
         for (Enclave enclave : enclaves) {
             for (String clz : enclave.getAssignedClasses()) {
                 assignments.add(new Assignment(clz, enclave.getName()));
-                
             }
         }
+    }
+    
+    public String findMaster() {
+        String mainClass = entry.getMainClass();
+        for (Enclave enclave : enclaves) {
+            ArrayList<String> assignedClasses = enclave.getAssignedClasses();
+            if (assignedClasses == null)
+                continue;
+            for (String clz : assignedClasses) {
+                if (clz.equals(mainClass))
+                    return enclave.getName();
+            }
+        }
+        return null;
     }
     
     // TODO: this does not make sense, it should be the other way around.
