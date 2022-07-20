@@ -28,16 +28,16 @@ public class RPCConstructor extends RPCObject
     }
     
     public String getUid() {
-    	int lastDot = fqcn.lastIndexOf('.');
-    	String clazz = "";
-    	if (lastDot < 0) {
-    		System.err.println("ERR: dot not found: " + fqcn);
-    	}
-    	else {
-    		clazz = fqcn.substring(lastDot + 1);
-    	}
-    	
-    	return fqcn + "." + clazz + argTypesToString(argTypes);
+        int lastDot = fqcn.lastIndexOf('.');
+        String clazz = "";
+        if (lastDot < 0) {
+            System.err.println("ERR: dot not found: " + fqcn);
+        }
+        else {
+            clazz = fqcn.substring(lastDot + 1);
+        }
+        
+        return fqcn + "." + clazz + argTypesToString(argTypes);
     }
     
     public Class<?>[] getArgTypes() {

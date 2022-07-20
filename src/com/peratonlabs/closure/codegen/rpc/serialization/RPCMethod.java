@@ -27,7 +27,7 @@ public class RPCMethod extends RPCObject
     }
     
     public String getUid() {
-    	return fqcn + "." + methodName + argTypesToString(argTypes);
+        return fqcn + "." + methodName + argTypesToString(argTypes);
     }
 
     public String getMethodName() {

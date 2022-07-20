@@ -32,19 +32,19 @@ public class RPCObject implements java.io.Serializable
     }
     
     public String getUid() {
-    	return fqcn;
+        return fqcn;
     }
     
     public String getUidResponse() {
-    	return getUid() + "_rsp";
+        return getUid() + "_rsp";
     }
     
     protected String argTypesToString(Class<?>[] argTypes) {
-    	String s = "";
-    	for (int i = 0; i < argTypes.length; i++)
-    		s += "." + argTypes[i].getName();
-    	
-    	return s;
+        String s = "";
+        for (int i = 0; i < argTypes.length; i++)
+            s += "." + argTypes[i].getName();
+        
+        return s;
     }
     
     public boolean isRead() {

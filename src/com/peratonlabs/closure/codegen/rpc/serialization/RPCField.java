@@ -13,8 +13,8 @@ package com.peratonlabs.closure.codegen.rpc.serialization;
 
 public class RPCField extends RPCObject
 {
-	private static final long serialVersionUID = 1L;
-	protected String fieldName;
+    private static final long serialVersionUID = 1L;
+    protected String fieldName;
     protected Object value;
 
     public RPCField(int oid, String fqcn, String fieldName, Object value, int flags) {
@@ -25,7 +25,7 @@ public class RPCField extends RPCObject
     }
     
     public String getUid() {
-    	return fqcn + "." + fieldName;
+        return fqcn + "." + fieldName;
     }
 
     public String getFieldName() {

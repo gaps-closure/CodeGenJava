@@ -48,7 +48,7 @@ public class ClosureRemoteHalMaster implements ClosureRemote
     public void instantiate(int oid, String fqcn, Class<?>[] argTypes, Object[] args) {
         RPCObject obj = new RPCConstructor(oid, fqcn, argTypes, args, 0);
         GapsTag tag = RPCObjectTag.lookup(obj.getUid());
-    	
+        
         rpc(obj, true, tag);
     }
     
@@ -57,35 +57,35 @@ public class ClosureRemoteHalMaster implements ClosureRemote
 
     public Object invokeMethod(int oid, String fqcn, String methodName, Class<?>[] argTypes, Object[] args) {
         RPCMethod obj = new RPCMethod(oid, fqcn, methodName, argTypes, args);
-    	GapsTag tag = RPCObjectTag.lookup(obj.getUid());
-    	
+        GapsTag tag = RPCObjectTag.lookup(obj.getUid());
+        
         return rpc(obj, false, tag);
     }
 
     public Object readField(int oid, String fqcn, String fieldName) {
         RPCField obj = new RPCField(oid, fqcn, fieldName, null,  RPCObject.FLAG_READ);
-    	GapsTag tag = RPCObjectTag.lookup(obj.getUid());
-    	
+        GapsTag tag = RPCObjectTag.lookup(obj.getUid());
+        
         return rpc(obj, false, tag);
     }
     
     public void writeField(int oid, String fqcn, String fieldName, Object value) {
         RPCField obj = new RPCField(oid, fqcn, fieldName, value,  RPCObject.FLAG_WRITE);
-       	GapsTag tag = RPCObjectTag.lookup(obj.getUid());
+        GapsTag tag = RPCObjectTag.lookup(obj.getUid());
         
-       	rpc(obj, true, tag);
+        rpc(obj, true, tag);
     }
     
     public Object readStaticField(String fqcn, String fieldName) {
         RPCField obj = new RPCField(-1, fqcn, fieldName, null, RPCObject.FLAG_READ | RPCObject.FLAG_STATIC);
-    	GapsTag tag = RPCObjectTag.lookup(obj.getUid());
-    	
+        GapsTag tag = RPCObjectTag.lookup(obj.getUid());
+        
         return rpc(obj, false, tag);
     }
     
     public void writeStaticField(String fqcn, String fieldName, Object value) {
         RPCField obj = new RPCField(-1, fqcn, fieldName, value,  RPCObject.FLAG_WRITE | RPCObject.FLAG_STATIC);
-    	GapsTag tag = RPCObjectTag.lookup(obj.getUid());
+        GapsTag tag = RPCObjectTag.lookup(obj.getUid());
 
         rpc(obj, true, tag);
     }

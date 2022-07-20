@@ -55,7 +55,7 @@ public abstract class LangElement implements Comparable<LangElement> {
         String shortTypeName = (genericType instanceof Class) ? type.getSimpleName() : this.fullTypeName;
         if (shortTypeName == null || shortTypeName.length() == 0) {
             shortTypeName = this.fullTypeName; // anonymous class
-        }		// for generics and anonymous: remove all package paths
+        }        // for generics and anonymous: remove all package paths
         this.shortTypeName = shortTypeName.replaceAll( "\\w+[\\.\\$](?!\\d+)", "" );
     }
 

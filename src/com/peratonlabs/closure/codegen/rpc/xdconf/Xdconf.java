@@ -102,41 +102,41 @@ public class Xdconf
     }
     
     public void gen(Config config, Xdcc xdcc, String templateDir) {
-    	try (BufferedReader br = new BufferedReader(new FileReader(templateDir + "/ipc.txt"))) {
-    		String inUri = br.readLine().trim();
-    		String outUri = br.readLine().trim();
+        try (BufferedReader br = new BufferedReader(new FileReader(templateDir + "/ipc.txt"))) {
+            String inUri = br.readLine().trim();
+            String outUri = br.readLine().trim();
 
-    		for (Enclave enclave : xdcc.getEnclaves()) {
-    		    String name = enclave.getName();
-    		    String sub = inUri + name.toLowerCase();
-    		    String pub = outUri + name.toLowerCase();
-    		    XdEnclave xdEnclave = new XdEnclave(name, sub, pub);
+            for (Enclave enclave : xdcc.getEnclaves()) {
+                String name = enclave.getName();
+                String sub = inUri + name.toLowerCase();
+                String pub = outUri + name.toLowerCase();
+                XdEnclave xdEnclave = new XdEnclave(name, sub, pub);
 
-    		    ArrayList<XdMap> myMaps = new ArrayList<XdMap>();
-    		    for (XdMap xdMap : xdMaps) {
-    		        XdMap myXdMap = new XdMap(xdMap);
-    		        
-    		        if (!xdMap.getFrom().equals(enclave.getName()) &&
-    		            !xdMap.getTo().equals(enclave.getName()) )
-    		            continue;
-    		        myMaps.add(myXdMap);
-    		    }
-    		    xdEnclave.setHalmaps(myMaps);
-    		    enclaves.add(xdEnclave);
-    		}
+                ArrayList<XdMap> myMaps = new ArrayList<XdMap>();
+                for (XdMap xdMap : xdMaps) {
+                    XdMap myXdMap = new XdMap(xdMap);
+                    
+                    if (!xdMap.getFrom().equals(enclave.getName()) &&
+                        !xdMap.getTo().equals(enclave.getName()) )
+                        continue;
+                    myMaps.add(myXdMap);
+                }
+                xdEnclave.setHalmaps(myMaps);
+                enclaves.add(xdEnclave);
+            }
 
-    		try {
-    		    String filename = config.getDstDir() + "/" + "xdconf.ini";
-    		    FileWriter myWriter;
-    		    myWriter = new FileWriter(filename);
-    		    myWriter.write(toJson(true));
-    		    myWriter.close();
-    		    System.out.println("generated " + filename);
-    		}
-    		catch (IOException e) {
-    		    e.printStackTrace();
-    		}
-    	}
+            try {
+                String filename = config.getDstDir() + "/" + "xdconf.ini";
+                FileWriter myWriter;
+                myWriter = new FileWriter(filename);
+                myWriter.write(toJson(true));
+                myWriter.close();
+                System.out.println("generated " + filename);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }

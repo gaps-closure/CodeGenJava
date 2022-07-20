@@ -35,7 +35,7 @@ public class GapsTag
     }
     
     public String toString() {
-    	return "mux/sec/type: " + mux + "/" + sec + "/" + typ;
+        return "mux/sec/type: " + mux + "/" + sec + "/" + typ;
     }
     
     public void tag_encode(GapsTag tag_in) {

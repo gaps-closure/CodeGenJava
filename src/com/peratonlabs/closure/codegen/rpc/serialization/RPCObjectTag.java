@@ -56,13 +56,13 @@ public class RPCObjectTag
         if (fullname.equals("response"))
             return new GapsTag(2, 2, 1);
         else {
-        	GapsTag tag = tagsMap.get(fullname);
-        	if (tag == null) {
-        		System.err.println("missing tag for " + fullname);
-        		return new GapsTag(2,2,1);
-        	}
-        	
-        	return tag;
+            GapsTag tag = tagsMap.get(fullname);
+            if (tag == null) {
+                System.err.println("missing tag for " + fullname);
+                return new GapsTag(2,2,1);
+            }
+            
+            return tag;
         }
     }
 }

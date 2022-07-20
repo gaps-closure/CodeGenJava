@@ -26,7 +26,7 @@ public class Reason
     public static final Reason REASON_DATA_TABLE_VERSION_MISMATCH   = newInstance(13);
     public static final Reason REASON_NO_RESPONSE                   = newInstance(14);
     public static final Reason REASON_PROTOCOL_VERSION_MISMATCH     = newInstance(15);
-    public static final Reason REASON_MAX_ENTRIES_ECEEDED		    = newInstance(16);
+    public static final Reason REASON_MAX_ENTRIES_ECEEDED            = newInstance(16);
 
     private static Map<Integer, Reason> lookup;
 
@@ -94,7 +94,7 @@ public class Reason
         String val;
         
         if (this == REASON_NOT_GIVEN)
-        	val = "Reason Not Given";
+            val = "Reason Not Given";
         else if (this == REASON_UNREADABLE_REQUEST)
             val = "Unreadable Request";
         else if (this == REASON_UNAUTHORIZED_REQUEST)
@@ -126,7 +126,7 @@ public class Reason
         else if (this == REASON_PROTOCOL_VERSION_MISMATCH)
             val = "Protocol Version Mismatch";
         else if (this == REASON_MAX_ENTRIES_ECEEDED)
-        	val = "Maximum Number of Entries Exceeded";
+            val = "Maximum Number of Entries Exceeded";
         else if (isUserDefined(code))
             val = "User Defined";
         else
