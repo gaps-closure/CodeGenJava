@@ -137,7 +137,7 @@ public class CodeGen
             myWriter.write(inUri);
             myWriter.write(outUri);
             
-            xdconf.genPubDst(myWriter);
+//            xdconf.genPubDst(myWriter);
             
             myWriter.close();
             System.out.println("generated " + file);
