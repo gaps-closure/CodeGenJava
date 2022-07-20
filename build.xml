@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project CodeGenJava">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="/home/tchen/eclipse-workspace"/>
+    <property name="dir.jarfile" value="/home/tchen"/>
+    <property name="closure.dir" value="code-gen"/>
+    <target name="create_run_jar">
+        <jar destfile="${closure.dir}/code-gen.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="com.peratonlabs.closure.codegen.CodeGen"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${dir.buildfile}/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/lib/gson-2.8.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/lib/joda-time-2.9.9.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/lib/log4j-1.2.14.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/lib/jzmq-3.1.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/lib/aspectjrt.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/lib/jaxb-api-2.4.0-b180830.0359.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/lib/javax.activation-api-1.2.0.jar"/>
+        </jar>
+      <copy todir="${closure.dir}/resources">
+           <fileset dir="resources" includes="**"/>
+      </copy>
+      <zip destfile="code-gen.zip">
+          <zipfileset dir="${closure.dir}" prefix="code-gen"/>
+      </zip>    	
+    </target>
+</project>

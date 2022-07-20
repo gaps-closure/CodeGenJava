@@ -19,7 +19,7 @@ public class Config
     private String codeDir = ".";              // root directory of the source (same or sub-directory of the src)
     private String dstDir = "/tmp/xdcc";
     private String cut = "test/cut-eop2.json";
-    private String jar = "TESTPROGRAM";        // JAR name without the extension
+    private String jar = "ClosureVideo";        // JAR name without the extension
     
     public Config() {
     }
