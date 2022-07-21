@@ -58,7 +58,7 @@ public class RPCObjectTag
         else {
             GapsTag tag = tagsMap.get(fullname);
             if (tag == null) {
-                System.err.println("missing tag for " + fullname);
+                System.err.println("*** ERROR: missing tag for " + fullname);
                 return new GapsTag(2,2,1);
             }
             
