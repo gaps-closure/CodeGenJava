@@ -42,7 +42,7 @@ public class RPCObject implements java.io.Serializable
     protected String argTypesToString(Class<?>[] argTypes) {
         String s = "";
         for (int i = 0; i < argTypes.length; i++)
-            s += "." + argTypes[i].getName();
+            s += "." + argTypes[i].getCanonicalName();
         
         return s;
     }
