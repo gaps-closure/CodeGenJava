@@ -1,6 +1,6 @@
 {
   "dstDir": "/tmp/xdcc",
-  "cut": "test/original.json",
+  "cut": "/home/tchen/gaps/CodeGenJava/test/cut-eop2.json",
   
   "srcDir": "/home/tchen/eop2/eop2-demo-clean",
   "codeDir": ".",
