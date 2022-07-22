@@ -4,5 +4,6 @@
   
   "srcDir": "/home/tchen/eop2/eop2-demo-clean",
   "codeDir": ".",
-  "jar": "ClosureVideo"
+  "jar": "ClosureVideo",
+  "compile": true
 }

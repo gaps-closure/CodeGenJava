@@ -20,6 +20,7 @@ public class Config
     private String dstDir = "/tmp/xdcc";
     private String cut = "test/cut-eop2.json";
     private String jar = "ClosureVideo";        // JAR name without the extension
+    private boolean compile = true;             // whether to compile the code after partition
     
     public Config() {
     }
@@ -74,5 +75,13 @@ public class Config
 
     public void setJar(String jar) {
         this.jar = jar;
+    }
+
+    public boolean isCompile() {
+        return compile;
+    }
+
+    public void setCompile(boolean compile) {
+        this.compile = compile;
     }
 }

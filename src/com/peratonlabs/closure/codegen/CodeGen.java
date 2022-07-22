@@ -19,8 +19,6 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 import com.peratonlabs.closure.codegen.partition.Entry;
@@ -43,7 +41,8 @@ public class CodeGen
     private void process() {
         load();
         generate();
-        compile();
+        if (config.isCompile())
+            compile();
         pack();
     }
     
