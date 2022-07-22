@@ -25,29 +25,48 @@ import com.peratonlabs.closure.codegen.rpc.xdconf.Xdconf;
 public class CodeGen
 {
     private Config config;
-    
+    private Xdcc xdcc;
+
     public static void main(String[] args) {
         CodeGen codeGen = new CodeGen();
         codeGen.getOpts(args);
-        
-        codeGen.generate();
+
+        codeGen.process();
     }
     
-    private void generate() {
+    private void process() {
+        load();
+        generate();
+        pack();
+    }
+    
+    private void pack() {
+        for (Enclave partition : xdcc.getEnclaves()) {
+            String dir = config.getDstDir() + "/" + partition.getName();
+            String zip = dir + ".zip";
+            
+            System.out.println("Zipping " + zip);
+            Utils.zipDirectory(dir, zip);
+        }
+    }
+    
+    private void load() {
         String spec = config.getCut();
         
-        Xdcc xdcc = Xdcc.load(spec);
+        xdcc = Xdcc.load(spec);
         if (xdcc == null) {
             System.err.println("Can't load " + spec);
             return;
         }
 //        System.out.println(xdcc.toJson(true));
-        
+    }
+
+    private void generate() {
         // make a copy of the original code for each enclave
         for (Enclave partition : xdcc.getEnclaves()) {
             String dst = config.getDstDir() + "/" + partition.getName();
             Utils.copyDir(config.getSrcDir(), dst, true);
-            System.out.println("copied original code to the " + partition.getName() + " enclave");
+            // System.out.println("copied original code to the " + partition.getName() + " enclave");
         }
         
         String cwd = System.getProperty("user.dir");
@@ -79,7 +98,7 @@ public class CodeGen
             }
             
             Utils.copyDir(common, parentDir, false);
-            System.out.println("copied " + common + " to the " + enclave + " enclave");
+            // System.out.println("copied " + common + " to the " + enclave + " enclave");
                        
             // String template = templateDir + "/aspectj.template";
             // all slave enclaves are passive, their main classes is replaced by a loop waiting for access.
@@ -119,7 +138,7 @@ public class CodeGen
                 FileWriter myWriter = new FileWriter(file);
                 myWriter.write(sCurrentLine);
                 myWriter.close();
-                System.out.println("generated " + file);
+                // System.out.println("generated " + file);
             }
         }
         catch (IOException e) {
@@ -140,7 +159,7 @@ public class CodeGen
 //            xdconf.genPubDst(myWriter);
             
             myWriter.close();
-            System.out.println("generated " + file);
+            // System.out.println("generated " + file);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();

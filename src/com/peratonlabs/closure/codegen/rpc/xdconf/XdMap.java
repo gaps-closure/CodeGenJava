@@ -9,10 +9,7 @@
 package com.peratonlabs.closure.codegen.rpc.xdconf;
 
 import java.util.HashMap;
-import java.util.HashSet;
-
 import com.peratonlabs.closure.codegen.partition.Enclave;
-import com.peratonlabs.closure.codegen.partition.MethodSignature;
 import com.peratonlabs.closure.codegen.partition.Xdcc;
 
 public class XdMap

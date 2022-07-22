@@ -141,7 +141,7 @@ public class CodeGenAspectJ
                 disallows.put(enclave, gened);
             }
             gened.add(fqcn);
-            System.out.println("generated " + file);
+            // System.out.println("generated " + file);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -178,7 +178,7 @@ public class CodeGenAspectJ
             FileWriter myWriter = new FileWriter(file);
             myWriter.write(sCurrentLine);
             myWriter.close();
-            System.out.println("generated " + file);
+            // System.out.println("generated " + file);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -228,8 +228,9 @@ public class CodeGenAspectJ
             myWriter.write("}\n");
             myWriter.close();
             
-            if (crossed)
-                System.out.println("generated " + filename);
+            if (crossed) {
+                //System.out.println("generated " + filename);
+            }
             else {
                 File file = new File(filename);
                 Files.deleteIfExists(file.toPath());

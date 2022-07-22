@@ -14,14 +14,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 //import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import com.peratonlabs.closure.codegen.CodeGenAspectJ;
 import com.peratonlabs.closure.codegen.Config;
 import com.peratonlabs.closure.codegen.partition.Call;
 import com.peratonlabs.closure.codegen.partition.Cut;
@@ -94,7 +92,7 @@ public class Xdconf
                 myWriter.write(xdMap.getName() + " " + xdMap.getMux() + " " + xdMap.getSec() + " " + xdMap.getTyp() + "\n");
             }
             myWriter.close();
-            System.out.println("generated " + filename);
+            // System.out.println("generated " + filename);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -131,7 +129,7 @@ public class Xdconf
                 myWriter = new FileWriter(filename);
                 myWriter.write(toJson(true));
                 myWriter.close();
-                System.out.println("generated " + filename);
+                // System.out.println("generated " + filename);
             }
             catch (IOException e) {
                 e.printStackTrace();
