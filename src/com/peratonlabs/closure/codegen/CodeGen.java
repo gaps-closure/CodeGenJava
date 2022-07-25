@@ -226,13 +226,15 @@ public class CodeGen
     }
     
     private void usage() {
-        System.out.println("-h/--help    \t this help");
-        System.out.println("-c/--cutJson \t cut JSON file");
-        System.out.println("-d/--dstDir  \t destination directory of the generated code");
-        System.out.println("-f/--config  \t config JSON file");
-        System.out.println("-i/--codeDir \t code directory (def is .), relative to srcDir)");
-        System.out.println("-j/--jar /   \t name of the application jar file");
-        System.out.println("-s/--srcDir  \t application source code");
+        System.out.println("GAPS/Closure Java Code Generator");
+        System.out.println("-h/--help                  \t this help");
+        System.out.println("-c/--cutJson <cut.json>    \t cut JSON file");
+        System.out.println("-d/--dstDir  <pathname>    \t destination directory of the generated code");
+        System.out.println("-f/--config  <config.json> \t config JSON file");
+        System.out.println("-i/--codeDir <source code> \t code directory relative to srcDir (def .)");
+        System.out.println("-j/--jar     <jar name>    \t name of the application jar file");
+        System.out.println("-s/--srcDir  <app src dir> \t application source code");
+        System.out.println("-p/--compile <true|false>  \t Compile the code after partition");
         System.exit(0);
     }
     
@@ -288,7 +290,6 @@ public class CodeGen
                 config.setCut(args[++i]);
                 break; 
                 
-                
             case "--config":
             case "-f":
                 if (config != null) {
@@ -297,6 +298,15 @@ public class CodeGen
                 }
                 config = Config.load(args[++i]);
                 break;
+                
+            case "--compile":
+            case "-p":
+                if (config == null) {
+                    config = new Config();
+                }
+                config.setCompile(Boolean.parseBoolean(args[++i]));
+                break; 
+                
             default:
                 System.err.println("unknown option: " + arg);
                 break;
