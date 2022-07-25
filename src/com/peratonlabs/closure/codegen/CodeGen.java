@@ -226,15 +226,15 @@ public class CodeGen
     }
     
     private void usage() {
-        System.out.println("GAPS/Closure Java Code Generator");
-        System.out.println("-h/--help                  \t this help");
-        System.out.println("-c/--cutJson <cut.json>    \t cut JSON file");
-        System.out.println("-d/--dstDir  <pathname>    \t destination directory of the generated code");
-        System.out.println("-f/--config  <config.json> \t config JSON file");
-        System.out.println("-i/--codeDir <source code> \t code directory relative to srcDir (def .)");
-        System.out.println("-j/--jar     <jar name>    \t name of the application jar file");
-        System.out.println("-s/--srcDir  <app src dir> \t application source code");
-        System.out.println("-p/--compile <true|false>  \t Compile the code after partition");
+        System.out.println("GAPS/Closure Java Code Generator\n" +
+                           "  -h/--help                  \t this help\n" +
+                           "  -c/--cutJson <cut.json>    \t cut JSON file\n" +
+                           "  -d/--dstDir  <pathname>    \t destination directory of the generated code\n" +
+                           "  -f/--config  <config.json> \t config JSON file\n" +
+                           "  -i/--codeDir <source code> \t code directory relative to srcDir (def .)\n" +
+                           "  -j/--jar     <jar name>    \t name of the application jar file\n" +
+                           "  -p/--compile <true|false>  \t Compile the code after partition\n" +
+                           "  -s/--srcDir  <app src dir> \t application source code\n");
         System.exit(0);
     }
     
@@ -308,7 +308,7 @@ public class CodeGen
                 break; 
                 
             default:
-                System.err.println("unknown option: " + arg);
+                System.err.println("unknown option: \n" + arg);
                 break;
             }
         }
