@@ -81,10 +81,18 @@ public class CodeGen
         Thread thread = new Thread(streamGobbler);
         // Executors.newSingleThreadExecutor().submit(streamGobbler);
         thread.start();
+        
+        StreamGobbler streamGobblerErr = new StreamGobbler(process.getErrorStream(), System.out::println);
+        Thread threadErr = new Thread(streamGobblerErr);
+        threadErr.start();
 
         int exitCode = 0;
         try {
             exitCode = process.waitFor();
+            if (exitCode != 0) {
+                System.err.println("HAL config generation failed");
+                System.exit(1);
+            }
         }
         catch (InterruptedException e) {
             e.printStackTrace();
@@ -113,10 +121,18 @@ public class CodeGen
                 Thread thread = new Thread(streamGobbler);
                 // Executors.newSingleThreadExecutor().submit(streamGobbler);
                 thread.start();
+                
+                StreamGobbler streamGobblerErr = new StreamGobbler(process.getErrorStream(), System.out::println);
+                Thread threadErr = new Thread(streamGobblerErr);
+                threadErr.start();
 
                 int exitCode = 0;
                 try {
                     exitCode = process.waitFor();
+                    if (exitCode != 0) {
+                        System.err.println(enclave + " compilation failed");
+                        System.exit(1);
+                    }
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();

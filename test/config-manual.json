@@ -5,5 +5,8 @@
   "srcDir": "/home/tchen/eop2/eop2-demo-clean",
   "codeDir": ".",
   "jar": "TESTPROGRAM",
-  "compile": true
+  "compile": true,
+  
+  "halCfg": "/home/tchen/gaps/hal/java-eop2-demo-hal/hal_autoconfig-multienclave.py",
+  "deviceFile": "/home/tchen/gaps/hal/java-eop2-demo-hal/devices_eop2_java_alllocal.json"
 }
