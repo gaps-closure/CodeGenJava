@@ -43,6 +43,8 @@ public class CodeGen
         generate();
         if (config.isCompile())
             compile();
+        
+        genHalConfig();
         pack();
     }
     
@@ -60,6 +62,34 @@ public class CodeGen
             new BufferedReader(new InputStreamReader(inputStream)).lines()
               .forEach(consumer);
         }
+    }
+    
+    private void genHalConfig() {
+        String cmd = config.getHalCfg() + " -d " + config.getDeviceFile() 
+                   + " -x " + config.getDstDir() + "/xdconf.ini -o " + config.getDstDir();
+        ProcessBuilder builder = new ProcessBuilder();
+        builder.command("sh", "-c", cmd);
+        builder.directory(new File("/tmp/xdcc/"));
+        Process process = null;
+        try {
+            process = builder.start();
+        }
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);
+        Thread thread = new Thread(streamGobbler);
+        // Executors.newSingleThreadExecutor().submit(streamGobbler);
+        thread.start();
+
+        int exitCode = 0;
+        try {
+            exitCode = process.waitFor();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assert exitCode == 0;
     }
     
     private void compile() {
@@ -99,10 +129,11 @@ public class CodeGen
     private void pack() {
         for (Enclave partition : xdcc.getEnclaves()) {
             String dir = config.getDstDir() + "/" + partition.getName();
+            String hal = config.getDstDir() + "/hal_" + partition.getName() + ".cfg";
             String zip = dir + ".zip";
             
             System.out.println("Zipping " + zip);
-            Utils.zipDirectory(dir, zip);
+            Utils.zipDirectory(dir, zip, hal);
         }
     }
     

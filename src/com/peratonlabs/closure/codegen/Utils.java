@@ -146,11 +146,13 @@ public class Utils
         }
     }
 
-    public static void zipDirectory(String dirName, String zipDirName) {
+    public static void zipDirectory(String dirName, String zipDirName, String hal) {
         try {
             File dir = new File(dirName);
             List<String> filesListInDir = new ArrayList<String>();
             populateFilesList(filesListInDir, dir);
+            
+            String basename = Utils.basename(dirName);
 
             // now zip files one by one
             // create ZipOutputStream to write to the zip file
@@ -160,7 +162,6 @@ public class Utils
 //                System.out.println("Zipping " + filePath);
                 // for ZipEntry we need to keep only relative file path, so we
                 // used substring on absolute path
-                String basename = Utils.basename(dirName);
                 ZipEntry ze = new ZipEntry(filePath.substring(dir.getAbsolutePath().length() - basename.length(), filePath.length()));
                 zos.putNextEntry(ze);
                 // read the file and write to ZipOutputStream
@@ -173,6 +174,17 @@ public class Utils
                 zos.closeEntry();
                 fis.close();
             }
+            
+            ZipEntry ze = new ZipEntry(hal.substring(dir.getAbsolutePath().length() - basename.length(), hal.length()));
+            zos.putNextEntry(ze);
+            FileInputStream fis = new FileInputStream(hal);
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = fis.read(buffer)) > 0) {
+                zos.write(buffer, 0, len);
+            }
+            fis.close();
+            
             zos.close();
             fos.close();
         }

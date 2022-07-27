@@ -22,6 +22,9 @@ public class Config
     private String jar = "ClosureVideo";        // JAR name without the extension
     private boolean compile = true;             // whether to compile the code after partition
     
+    private String halCfg = "/home/tchen/gaps/hal/java-eop2-demo-hal/hal_autoconfig-multienclave.py";
+    private String deviceFile = "/home/tchen/gaps/hal/java-eop2-demo-hal/devices_eop2_java_alllocal.json";
+    
     public Config() {
     }
     
@@ -83,5 +86,21 @@ public class Config
 
     public void setCompile(boolean compile) {
         this.compile = compile;
+    }
+
+    public String getHalCfg() {
+        return halCfg;
+    }
+
+    public void setHalCfg(String halCfg) {
+        this.halCfg = halCfg;
+    }
+
+    public String getDeviceFile() {
+        return deviceFile;
+    }
+
+    public void setDeviceFile(String deviceFile) {
+        this.deviceFile = deviceFile;
     }
 }
