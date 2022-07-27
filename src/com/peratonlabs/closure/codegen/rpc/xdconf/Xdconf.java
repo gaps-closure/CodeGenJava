@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 //import org.apache.log4j.Logger;
 
@@ -43,6 +44,8 @@ public class Xdconf
             System.err.println("missing 'cuts'");
             return;
         }
+        HashSet<String> created = new HashSet<String>();
+
         for (Cut cut : cuts) {
             Call call = cut.getCallee();
             String toLevel = call.getLevel();
@@ -52,14 +55,15 @@ public class Xdconf
             MethodSignature signature = cut.getMethodSignature();
             String sigStr = signature.toString();
             
-//            int mux = XdMap.getMux(enclave);
-//            int sec = mux;
-//            int typ = XdMap.getType(enclave, sigStr);
-            
             for (Call caller : cut.getAllowedCallers()) {
                 String fromLevel = caller.getLevel();
                 Enclave enclaveFrom = xdcc.findEnclaveByLevel(fromLevel);
                 String enclaveFromName = enclaveFrom.getName();
+                
+                String k = enclaveFromName + "-" + enclaveToName + "-" + sigStr;
+                if (created.contains(k))
+                    continue;
+                created.add(k);
                 
                 int sec = XdMap.getSec(enclaveFromName, enclaveToName);
                 int mux = sec;

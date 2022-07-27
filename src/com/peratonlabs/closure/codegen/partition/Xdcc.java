@@ -18,6 +18,7 @@ import java.util.HashSet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import com.peratonlabs.closure.codegen.rpc.xdconf.XdMap;
 
 public class Xdcc
 {
@@ -70,6 +71,34 @@ public class Xdcc
             level = name.substring(0, name.length() - 2);
             level = level.toLowerCase();
             enclave.setLevel(level);
+        }
+        
+        HashSet<String> created = new HashSet<String>();
+        ArrayList<Cut> dupRemoved = new ArrayList<Cut>();
+        for (Cut cut : cuts) {
+            Call call = cut.getCallee();
+            String toLevel = call.getLevel();
+            Enclave enclaveTo = findEnclaveByLevel(toLevel);
+            String enclaveToName = enclaveTo.getName();
+            
+            MethodSignature signature = cut.getMethodSignature();
+            String sigStr = signature.toString();
+            
+            for (Call caller : cut.getAllowedCallers()) {
+                String fromLevel = caller.getLevel();
+                Enclave enclaveFrom = findEnclaveByLevel(fromLevel);
+                String enclaveFromName = enclaveFrom.getName();
+                
+                String k = enclaveFromName + "-" + enclaveToName + "-" + sigStr;
+                if (created.contains(k))
+                    continue;
+                created.add(k);
+                dupRemoved.add(cut);
+            }
+        }
+        if (cuts.size() > created.size()) {
+            cuts.clear();
+            cuts.addAll(dupRemoved);
         }
     }
     
