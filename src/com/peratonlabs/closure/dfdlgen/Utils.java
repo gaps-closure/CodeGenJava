@@ -67,7 +67,7 @@ public interface Utils
         return maxDepth;
     }
     
-    private static int findDepth(Class_ root, Class_ clazz) {
+    static int findDepth(Class_ root, Class_ clazz) {
         Class_ x = clazz;
         int depth = 0;
         while (x != root) {
