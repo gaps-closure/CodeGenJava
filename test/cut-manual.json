@@ -15,7 +15,7 @@
             "com.peratonlabs.closure.eop2.camera.CameraReader",
             "com.peratonlabs.closure.eop2.camera.CameraType"
          ],
-         "name":"Purple_E",
+         "name":"purple_E",
          "level":"purple"
       },
       {
@@ -29,7 +29,7 @@
             "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh",
             "com.peratonlabs.closure.eop2.level.high.VideoServerHigh"
          ],
-         "name":"Orange_E",
+         "name":"orange_E",
          "level":"orange"
       },
       {
@@ -43,7 +43,7 @@
             "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal",
             "com.peratonlabs.closure.eop2.level.normal.VideoServerNormal"
          ],
-         "name":"Green_E",
+         "name":"green_E",
          "level":"green"
       }
    ],

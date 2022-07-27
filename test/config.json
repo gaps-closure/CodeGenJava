@@ -1,9 +1,9 @@
 {
   "dstDir": "/tmp/xdcc",
-  "cut": "/home/tchen/gaps/CodeGenJava/test/cut-eop2.json",
+  "cut": "test/cut.json",
   
-  "srcDir": "/home/tchen/eop2/eop2-demo-clean",
+  "srcDir": "/home/tchen/gaps/capo/Java/examples/eop2-demo",
   "codeDir": ".",
-  "jar": "ClosureVideo",
+  "jar": "TESTPROGRAM",
   "compile": true
 }

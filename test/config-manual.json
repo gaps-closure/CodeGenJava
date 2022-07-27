@@ -1,0 +1,9 @@
+{
+  "dstDir": "/tmp/xdcc",
+  "cut": "/home/tchen/gaps/CodeGenJava/test/cut-manual.json",
+  
+  "srcDir": "/home/tchen/eop2/eop2-demo-clean",
+  "codeDir": ".",
+  "jar": "TESTPROGRAM",
+  "compile": true
+}

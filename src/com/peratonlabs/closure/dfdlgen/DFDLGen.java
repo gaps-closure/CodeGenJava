@@ -25,8 +25,8 @@ public class DFDLGen
     private BaseProjectImporter projectImporter;
     private ProjectConfig config;
     
-    private String rootClass = "test.dfdl.One";
-    private String jarFile = "lib/test.jar";
+    private String rootClass = "com.peratonlabs.closure.codegen.rpc.serialization.RPCObject";
+    private String jarFile = "test/rpc.jar";
     
     private void addClasses() throws Exception {
         if (config.isPathToBeUsedForProjectLoad()) {
@@ -121,7 +121,7 @@ public class DFDLGen
             Class_ clazz = classImporter.getImportedClass(rootClass);
             
             if (clazz == null) {
-                System.err.println("class not loaded");
+                System.err.println("class not loaded: " + rootClass);
                 return;
             }
             ClassToDFDL converter = new ClassToDFDL(classImporter);
