@@ -2,7 +2,29 @@
 <project default="create_run_jar" name="Create Runnable Jar for Project CodeGenJava">
     <property name="dir.buildfile" value="."/>
     <property name="closure.dir" value="code-gen"/>
-    <target name="create_run_jar">
+    <property name="output.dir" value="bin"/>
+    <property name="src.dir" value="src"/>
+
+    <path id="build.classpath">
+      <pathelement location="lib/aspectjrt.jar"/>
+      <pathelement location="lib/gson-2.8.0.jar"/>
+      <pathelement location="lib/javax.activation-api-1.2.0.jar"/>
+      <pathelement location="lib/jaxb-api-2.4.0-b180830.0359.jar"/>
+      <pathelement location="lib/joda-time-2.9.9.jar"/>
+      <pathelement location="lib/jzmq-3.1.0.jar"/>
+    </path>
+
+    <target name="compile" description="Compile the code">
+      <mkdir dir="${output.dir}"/>
+      <javac source="1.8" bootclasspath="${java5.boot.classpath}" fork="false" verbose="false" target="1.8" deprecation="true" optimize="false" debug="true" nowarn="false" includeantruntime="false" destdir="${output.dir}">
+        <src>
+          <pathelement location="${src.dir}"/>
+        </src>
+        <classpath refid="build.classpath"/>
+      </javac>
+    </target>    
+    
+    <target name="create_run_jar" depends="compile">
         <jar destfile="${closure.dir}/code-gen.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="com.peratonlabs.closure.codegen.CodeGen"/>
