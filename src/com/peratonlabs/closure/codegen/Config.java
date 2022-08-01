@@ -17,7 +17,7 @@ public class Config
 {
     private String srcDir = "/home/tchen/gaps/capo/Java/examples/eop2-demo";
     private String codeDir = ".";              // root directory of the source (same or sub-directory of the src)
-    private String dstDir = "/tmp/xdcc";
+    private String dstDir = "/home/tchen/gaps/xdcc";
     private String cut = "test/cut.json";
     private String jar = "TESTPROGRAM";        // JAR name without the extension
     private boolean compile = true;            // whether to compile the code after partition
