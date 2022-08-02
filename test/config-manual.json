@@ -1,12 +1,12 @@
 {
   "dstDir": "/tmp/xdcc",
-  "cut": "/home/tchen/gaps/CodeGenJava/test/cut-manual.json",
+  "cut": "/home/closure/gaps/CodeGenJava/test/cut-manual.json",
   
-  "srcDir": "/home/tchen/eop2/eop2-demo-clean",
+  "srcDir": "/home/closure/eop2/eop2-demo-clean",
   "codeDir": ".",
   "jar": "TESTPROGRAM",
   "compile": true,
   
-  "halCfg": "/home/tchen/gaps/hal/java-eop2-demo-hal/hal_autoconfig-multienclave.py",
-  "deviceFile": "/home/tchen/gaps/hal/java-eop2-demo-hal/devices_eop2_java_alllocal.json"
+  "halCfg": "/home/closure/gaps/hal/java-eop2-demo-hal/hal_autoconfig-multienclave.py",
+  "deviceFile": "/home/closure/gaps/hal/java-eop2-demo-hal/devices_eop2_java_alllocal.json"
 }

@@ -70,7 +70,7 @@
             "name": "orange_E"
         }
     ], 
-    "rootDir": "/home/tchen/gaps/capo/Java", 
+    "rootDir": "/home/closure/gaps/capo/Java", 
     "assingments": [
         {
             "className": "com.peratonlabs.closure.eop2.camera.CameraReader", 

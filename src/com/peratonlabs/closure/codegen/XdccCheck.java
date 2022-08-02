@@ -23,7 +23,7 @@ public class XdccCheck
     
     public static boolean allowedMethod(String callerEnclave, String fqcn, String methodName, Class<?>[] argTypes) {
         if (xdcc == null) {
-            xdcc = Xdcc.load("/home/tchen/tmp/cut.json");
+            xdcc = Xdcc.load("/home/closure/CodeGenJava/test/cut.json");
         }
 
         boolean allowed = false;

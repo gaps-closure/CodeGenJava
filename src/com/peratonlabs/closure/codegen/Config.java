@@ -15,15 +15,15 @@ import java.io.FileReader;
 
 public class Config
 {
-    private String srcDir = "/home/tchen/gaps/capo/Java/examples/eop2-demo";
+    private String srcDir = "/home/closure/gaps/capo/Java/examples/eop2-demo";
     private String codeDir = ".";              // root directory of the source (same or sub-directory of the src)
-    private String dstDir = "/home/tchen/gaps/xdcc";
+    private String dstDir = "/home/closure/gaps/xdcc";
     private String cut = "test/cut.json";
     private String jar = "TESTPROGRAM";        // JAR name without the extension
     private boolean compile = true;            // whether to compile the code after partition
     
-    private String halCfg = "/home/tchen/gaps/hal/java-eop2-demo-hal/hal_autoconfig-multienclave.py";
-    private String deviceFile = "/home/tchen/gaps/hal/java-eop2-demo-hal/devices_eop2_java_alllocal.json";
+    private String halCfg = "/home/closure/gaps/hal/java-eop2-demo-hal/hal_autoconfig-multienclave.py";
+    private String deviceFile = "/home/closure/gaps/hal/java-eop2-demo-hal/devices_eop2_java_alllocal.json";
     
     public Config() {
     }

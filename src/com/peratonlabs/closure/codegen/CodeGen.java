@@ -69,7 +69,7 @@ public class CodeGen
                    + " -x " + config.getDstDir() + "/xdconf.ini -o " + config.getDstDir();
         ProcessBuilder builder = new ProcessBuilder();
         builder.command("sh", "-c", cmd);
-        builder.directory(new File("/tmp/xdcc/"));
+        builder.directory(new File(config.getDstDir() + "/"));
         Process process = null;
         try {
             process = builder.start();
@@ -109,7 +109,7 @@ public class CodeGen
 
                 ProcessBuilder builder = new ProcessBuilder();
                 builder.command("sh", "-c", cmds[i]);
-                builder.directory(new File("/tmp/xdcc/" + enclave));
+                builder.directory(new File(config.getDstDir() + "/" + enclave));
                 Process process = null;
                 try {
                     process = builder.start();
