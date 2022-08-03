@@ -303,48 +303,6 @@
         }, 
         {
             "callee": {
-                "level": "orange", 
-                "type": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.video.manager.VideoManager"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [
-                    "int", 
-                    "java.lang.String"
-                ], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh", 
-                "name": "start", 
-                "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "orange", 
-                "type": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.video.manager.VideoManager"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [
-                    "int", 
-                    "java.lang.String"
-                ], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh", 
-                "name": "start", 
-                "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
                 "level": "green", 
                 "type": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal"
             }, 
@@ -362,84 +320,6 @@
                 "fqcn": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal", 
                 "name": "start", 
                 "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "green", 
-                "type": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.video.manager.VideoManager"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [
-                    "int", 
-                    "java.lang.String"
-                ], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal", 
-                "name": "start", 
-                "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "green", 
-                "type": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.video.manager.VideoManager"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [
-                    "int", 
-                    "java.lang.String"
-                ], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal", 
-                "name": "start", 
-                "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "orange", 
-                "type": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.video.manager.VideoManager"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh", 
-                "name": "getRequest", 
-                "returnType": "com.peratonlabs.closure.eop2.video.requester.RequestHigh"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "orange", 
-                "type": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.video.manager.VideoManager"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh", 
-                "name": "getRequest", 
-                "returnType": "com.peratonlabs.closure.eop2.video.requester.RequestHigh"
             }
         }, 
         {
@@ -480,42 +360,6 @@
         }, 
         {
             "callee": {
-                "level": "green", 
-                "type": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.video.manager.VideoManager"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal", 
-                "name": "getRequest", 
-                "returnType": "com.peratonlabs.closure.eop2.video.requester.Request"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "green", 
-                "type": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.video.manager.VideoManager"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal", 
-                "name": "getRequest", 
-                "returnType": "com.peratonlabs.closure.eop2.video.requester.Request"
-            }
-        }, 
-        {
-            "callee": {
                 "level": "orange", 
                 "type": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh"
             }, 
@@ -531,90 +375,6 @@
                     "byte[]"
                 ], 
                 "fqcn": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh", 
-                "name": "send", 
-                "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "orange", 
-                "type": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.transcoder.Transcoder"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [
-                    "java.lang.String", 
-                    "byte[]"
-                ], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh", 
-                "name": "send", 
-                "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "orange", 
-                "type": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.transcoder.Transcoder"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [
-                    "java.lang.String", 
-                    "byte[]"
-                ], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.high.VideoRequesterHigh", 
-                "name": "send", 
-                "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "green", 
-                "type": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.transcoder.Transcoder"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [
-                    "java.lang.String", 
-                    "byte[]"
-                ], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal", 
-                "name": "send", 
-                "returnType": "void"
-            }
-        }, 
-        {
-            "callee": {
-                "level": "green", 
-                "type": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal"
-            }, 
-            "allowedCallers": [
-                {
-                    "level": "purple", 
-                    "type": "com.peratonlabs.closure.eop2.transcoder.Transcoder"
-                }
-            ], 
-            "methodSignature": {
-                "parameterTypes": [
-                    "java.lang.String", 
-                    "byte[]"
-                ], 
-                "fqcn": "com.peratonlabs.closure.eop2.level.normal.VideoRequesterNormal", 
                 "name": "send", 
                 "returnType": "void"
             }
