@@ -49,7 +49,7 @@ public class ClassToDFDL
     
     private boolean debug = false;
     private boolean gaps = false;
-    private String outputDir = "y:/gaps/dfdl/";
+    private String outputDir = "/home/tchen/gaps/dfdl/";
     private CompiledClassImporter classImporter;
 
     public ClassToDFDL(CompiledClassImporter classImporter) {
